@@ -1,70 +1,71 @@
-package com.project.tcc.projecttcc.model;
+package com.project.tcc.projecttcc.dtos;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-//import java.util.UUID;
-import javax.persistence.*;
 
+import javax.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "TB_EQUIPMENT")
-public class EquipmentModel implements Serializable{
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    private String assetId;
-    @Column(nullable = false)
-    private String description;
-    @Column(nullable = false, length = 70)
-    private String partNumber;
-    @Column(nullable = true)
-    private LocalDateTime dueDate;
-    @Column(nullable = true, length = 130) 
-    private String idContainer;
-    @Column(nullable = true, length = 70)
-    private String idLocation;
+public class EquipmentDto {
     
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
+    @NotBlank
+    private String assetId;
+    @NotBlank
+    private String description;
+
+    private String partNumber;
+    
+    private LocalDateTime dueDate;
+    
+    private String idContainer;
+    
+    private String idLocation;
 
     public String getAssetId() {
         return assetId;
     }
+
     public void setAssetId(String assetId) {
         this.assetId = assetId;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getPartNumber() {
         return partNumber;
     }
+
     public void setPartNumber(String partNumber) {
         this.partNumber = partNumber;
     }
+
     public LocalDateTime getDueDate() {
         return dueDate;
     }
+
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
+
     public String getIdContainer() {
         return idContainer;
     }
+
     public void setIdContainer(String idContainer) {
         this.idContainer = idContainer;
     }
+
     public String getIdLocation() {
         return idLocation;
     }
+
     public void setIdLocation(String idLocation) {
         this.idLocation = idLocation;
     }
-    
-    
 
+    
 }
