@@ -19,12 +19,10 @@ public class EquipmentModel implements Serializable{
     @Column(nullable = true)
     private LocalDateTime dueDate;
     
-    @Column(nullable = true, length = 130) 
     @ManyToOne
     @JoinColumn(name = "idContainer")
     private ContainerModel container;
     
-    @Column(nullable = true, length = 70)
     @ManyToOne
     @JoinColumn(name = "idLocation")
     private LocationModel location;
