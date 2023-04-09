@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotBlank;
 
+import com.project.tcc.projecttcc.model.ContainerModel;
+import com.project.tcc.projecttcc.model.LocationModel;
+
 public class EquipmentDto {
     
     @NotBlank
@@ -15,9 +18,9 @@ public class EquipmentDto {
     
     private LocalDateTime dueDate;
     
-    private String container;
+    private ContainerModel container;
     
-    private String location;
+    private LocationModel location;
 
     public String getAssetId() {
         return assetId;
@@ -51,21 +54,21 @@ public class EquipmentDto {
         this.dueDate = dueDate;
     }
 
-    public String getContainer() {
+    public ContainerModel getContainer() {
         return container;
     }
 
-    public void setContainer(String container) {
+    public void setContainer(ContainerModel container) {
         this.container = container;
     }
 
-    public String getLocation() {
+    public LocationModel getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(LocationModel location) {
         this.location = location;
     }
 
-    
+
 }

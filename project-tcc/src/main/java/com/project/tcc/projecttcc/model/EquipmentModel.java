@@ -2,7 +2,6 @@ package com.project.tcc.projecttcc.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-//import java.util.UUID;
 import javax.persistence.*;
 
 
@@ -19,11 +18,17 @@ public class EquipmentModel implements Serializable{
     private String partNumber;
     @Column(nullable = true)
     private LocalDateTime dueDate;
-    @Column(nullable = true, length = 130) 
-    private String container;
-    @Column(nullable = true, length = 70)
-    private String location;
     
+    @Column(nullable = true, length = 130) 
+    @ManyToOne
+    @JoinColumn(name = "idContainer")
+    private ContainerModel container;
+    
+    @Column(nullable = true, length = 70)
+    @ManyToOne
+    @JoinColumn(name = "idLocation")
+    private LocationModel location;
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
@@ -31,40 +36,49 @@ public class EquipmentModel implements Serializable{
     public String getAssetId() {
         return assetId;
     }
+
     public void setAssetId(String assetId) {
         this.assetId = assetId;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getPartNumber() {
         return partNumber;
     }
+
     public void setPartNumber(String partNumber) {
         this.partNumber = partNumber;
     }
+
     public LocalDateTime getDueDate() {
         return dueDate;
     }
+
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
-    public String getContainer() {
+
+    public ContainerModel getContainer() {
         return container;
     }
-    public void setContainer(String idContainer) {
-        this.container = idContainer;
+
+    public void setContainer(ContainerModel container) {
+        this.container = container;
     }
-    public String getLocation() {
+
+    public LocationModel getLocation() {
         return location;
     }
-    public void setLocation(String idLocation) {
-        this.location = idLocation;
+
+    public void setLocation(LocationModel location) {
+        this.location = location;
     }
     
-    
-
 }
