@@ -20,9 +20,9 @@ public class EquipmentModel implements Serializable{
     @Column(nullable = true)
     private LocalDateTime dueDate;
     @Column(nullable = true, length = 130) 
-    private String idContainer;
+    private String container;
     @Column(nullable = true, length = 70)
-    private String idLocation;
+    private String location;
     
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -52,17 +52,17 @@ public class EquipmentModel implements Serializable{
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
-    public String getIdContainer() {
-        return idContainer;
+    public String getContainer() {
+        return container;
     }
-    public void setIdContainer(String idContainer) {
-        this.idContainer = idContainer;
+    public void setContainer(String idContainer) {
+        this.container = idContainer;
     }
-    public String getIdLocation() {
-        return idLocation;
+    public String getLocation() {
+        return location;
     }
-    public void setIdLocation(String idLocation) {
-        this.idLocation = idLocation;
+    public void setLocation(String idLocation) {
+        this.location = idLocation;
     }
     
     

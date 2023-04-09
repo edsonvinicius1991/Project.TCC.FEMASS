@@ -15,9 +15,9 @@ public class EquipmentDto {
     
     private LocalDateTime dueDate;
     
-    private String idContainer;
+    private String container;
     
-    private String idLocation;
+    private String location;
 
     public String getAssetId() {
         return assetId;
@@ -51,20 +51,20 @@ public class EquipmentDto {
         this.dueDate = dueDate;
     }
 
-    public String getIdContainer() {
-        return idContainer;
+    public String getContainer() {
+        return container;
     }
 
-    public void setIdContainer(String idContainer) {
-        this.idContainer = idContainer;
+    public void setContainer(String container) {
+        this.container = container;
     }
 
-    public String getIdLocation() {
-        return idLocation;
+    public String getLocation() {
+        return location;
     }
 
-    public void setIdLocation(String idLocation) {
-        this.idLocation = idLocation;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     
