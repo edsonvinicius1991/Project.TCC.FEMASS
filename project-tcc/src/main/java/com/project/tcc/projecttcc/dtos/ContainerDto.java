@@ -1,30 +1,21 @@
-package com.project.tcc.projecttcc.model;
-import java.io.Serializable;
+package com.project.tcc.projecttcc.dtos;
+
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
-import javax.persistence.*;
+import com.project.tcc.projecttcc.model.LocationModel;
 
 
-@Entity
-@Table(name = "TB_CONTAINER")
-public class ContainerModel implements Serializable{
-    private static final long serialVersionUID = 1L;
-    
+public class ContainerDto {
 
-    @Id
+    @NotBlank
     private String idContainer;
-    @Column(nullable = true)
+    
     private LocalDateTime dueDate;
-    @Column(nullable = true)
+
     private String containerType;
 
-    @ManyToOne
-    @JoinColumn(name = "idLocation")
     private LocationModel location;
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 
     public String getIdContainer() {
         return idContainer;

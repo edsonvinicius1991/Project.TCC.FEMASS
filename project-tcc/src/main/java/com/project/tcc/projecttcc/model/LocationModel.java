@@ -14,11 +14,11 @@ public class LocationModel implements Serializable{
     private String idLocation;
     @Column(nullable = false)
     private String rig;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String customer;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String well;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String country;
     
     public static long getSerialversionuid() {
