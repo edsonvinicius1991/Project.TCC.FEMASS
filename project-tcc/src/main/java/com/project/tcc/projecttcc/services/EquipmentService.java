@@ -1,5 +1,7 @@
 package com.project.tcc.projecttcc.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -20,4 +22,10 @@ public class EquipmentService {
     public EquipmentModel save(EquipmentModel equipmentModel){
         return equipmentRepository.save(equipmentModel);
     }
+
+    public List<EquipmentModel> findAll() {
+        return equipmentRepository.findAll();
+    }
+
+    
 }
