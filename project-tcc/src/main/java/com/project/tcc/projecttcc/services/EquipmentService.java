@@ -1,6 +1,7 @@
 package com.project.tcc.projecttcc.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -27,5 +28,11 @@ public class EquipmentService {
         return equipmentRepository.findAll();
     }
 
-    
+    public Optional<EquipmentModel> findById(String assetId) {
+        return equipmentRepository.findById(assetId);
+    }
+    @Transactional
+    public void delete(EquipmentModel equipmentModel) {
+        equipmentRepository.delete(equipmentModel);
+    }
 }
