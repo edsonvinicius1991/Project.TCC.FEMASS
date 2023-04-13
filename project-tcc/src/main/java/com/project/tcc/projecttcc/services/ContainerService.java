@@ -29,8 +29,8 @@ public class ContainerService {
         return containerRepository.findAll();
     }
 
-    public Optional<ContainerModel> findById(String assetId) {
-        return containerRepository.findById(assetId);
+    public Optional<ContainerModel> findById(String idContainer) {
+        return containerRepository.findById(idContainer);
     }
     @Transactional
     public void delete(ContainerModel containerModel) {
