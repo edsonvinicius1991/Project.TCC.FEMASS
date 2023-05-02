@@ -49,7 +49,7 @@ const SideNavBar = () => {
 				<div className="nav-heading">
 					{isExpanded && (
 						<div className="nav-brand">
-							<img src="icons/Logo.svg" alt="" srcSet="" />
+							<img src="icons\baker-hughes-icons/BKR.svg" alt="" srcSet="" />
 							<h2>AssetTrack</h2>
 						</div>
 					)}
@@ -65,16 +65,16 @@ const SideNavBar = () => {
 					</button>
 				</div>
 				<div className="nav-menu">
-                    {menuItems.map(({ text, icon }) => (
-                        <a
-                            key={text}
-                            className={isExpanded ? "menu-item" : "menu-item menu-item-NX"}
-                            href="#"
-                        >
-                            <img className="menu-item-icon" src={icon} alt="" srcSet="" />
-                            {isExpanded && <p>{text}</p>}
-                        </a>
-                    ))}
+					{menuItems.map(({ text, icon }) => (
+						<a
+							key={text}
+							className={isExpanded ? "menu-item" : "menu-item menu-item-NX"}
+							href="#"
+						>
+							<img className="menu-item-icon" src={icon} alt="" srcSet="" />
+							{isExpanded && <p>{text}</p>}
+						</a>
+					))}
 				</div>
 			</div>
 			<div className="nav-footer">
