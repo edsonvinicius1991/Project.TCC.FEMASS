@@ -87,7 +87,7 @@ const SideNavBar = () => {
 							srcSet=""
 						/>
 						<div className="nav-footer-info">
-							<p className="nav-footer-user-name">M Showkat</p>
+							<p className="nav-footer-user-name">Admin</p>
 							<p className="nav-footer-user-position">store admin</p>
 						</div>
 					</div>
