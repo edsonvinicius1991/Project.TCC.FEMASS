@@ -9,10 +9,10 @@ function Cards() {
                 <div className="card">
                 <div className="card-body">
                     <h4 className="card-title">Certification expiration 90 days</h4>
-                    <div className="card-icon"><i class="bi bi-exclamation-triangle"></i></div>
-                    <p className="card-text">Some example text. Some example text.</p>
+                    <div className="card-yellow"><i class="bi bi-shield-x"></i></div>
+                    <h1 className="card-text">10</h1>
                     <a href="#" className="card-link">More details</a>
-                    <a href="#" className="card-link">Another link</a>
+                    
                 </div>
                 </div>
             </div>
@@ -20,9 +20,10 @@ function Cards() {
                 <div className="card">
                 <div className="card-body">
                     <h4 className="card-title">Certificacion expired</h4>
-                    <p className="card-text">Some example text. Some example text.</p>
+                    <div className="card-red"><i class="bi bi-shield-x"></i></div>
+                    <h1 className="card-text">5</h1>
                     <a href="#" className="card-link">More details</a>
-                    <a href="#" className="card-link">Another link</a>
+                    
                 </div>
                 </div>
             </div>
@@ -30,9 +31,10 @@ function Cards() {
                 <div className="card">
                 <div className="card-body">
                     <h4 className="card-title">Maintenance Required</h4>
-                    <p className="card-text">Some example text. Some example text.</p>
+                    <div className="card-blue"><i class="bi bi-wrench-adjustable"></i></div>
+                    <h1 className="card-text">2</h1>
                     <a href="#" className="card-link">More details</a>
-                    <a href="#" className="card-link">Another link</a>
+                    
                 </div>
                 </div>
                 </div>
