@@ -26,11 +26,15 @@
     color: white;
 }
 
-.Main-div {
+.main-div {
     display: flex;
     
     
 
+}
+
+.overview-div{
+    display: block;
 }
 
 .App-link {

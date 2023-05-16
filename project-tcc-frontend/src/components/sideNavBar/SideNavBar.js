@@ -7,34 +7,42 @@ const SideNavBar = () => {
 		{
 			text: "Overview",
 			icon: "icons/grid.svg",
+			link: "/",
 		},
 		{
 			text: "Equipments",
-			icon: "icons/user.svg",
+			icon: "icons/tools.svg",
+			link: "/equipments",
 		},
 		{
 			text: "Wireline Units",
-			icon: "icons/message.svg",
+			icon: "icons/truck.svg",
+			link: "*",
 		},
 		{
 			text: "Cables",
-			icon: "icons/pie-chart.svg",
+			icon: "icons/cable-reel.png",
+			link: "*",
 		},
 		{
 			text: "Locations",
-			icon: "icons/folder.svg",
+			icon: "icons/geo-alt.svg",
+			link: "*",
 		},
 		{
 			text: "Orders",
-			icon: "icons/shopping-cart.svg",
+			icon: "icons/file-text.svg",
+			link: "*",
 		},
 		{
 			text: "Search",
-			icon: "icons/heart.svg",
+			icon: "icons/search.svg",
+			link: "*",
 		},
 		{
-			text: "Settings",
-			icon: "icons/settings.svg",
+			text: "Shipping",
+			icon: "icons/box-seam.svg",
+			link: "*",
 		},
 	];
 	return (
@@ -42,7 +50,7 @@ const SideNavBar = () => {
 			className={
 				isExpanded
 					? "side-nav-container"
-					: "side-nav-container side-nav-container-NX"
+					: "side-nav-container side-nav-container-NX" 
 			}
 		>
 			<div className="nav-upper">
@@ -65,11 +73,11 @@ const SideNavBar = () => {
 					</button>
 				</div>
 				<div className="nav-menu">
-					{menuItems.map(({ text, icon }) => (
+					{menuItems.map(({ text, icon,link}) => (
 						<a
 							key={text}
 							className={isExpanded ? "menu-item" : "menu-item menu-item-NX"}
-							href="#"
+							href={link}
 						>
 							<img className="menu-item-icon" src={icon} alt="" srcSet="" />
 							{isExpanded && <p>{text}</p>}
