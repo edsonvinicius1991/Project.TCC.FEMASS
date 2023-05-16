@@ -5,7 +5,7 @@ import './Cards.css';
 function Cards() {
     return (
         <div className="row">
-            <h1 style={{margin: "50px 25px"}}>OVERVIEW</h1>
+            
             <div className="column">
                 <div className="card">
                     <div className="card-body">

@@ -14,11 +14,11 @@ function App() {
 
     
   
-      <section>
+      <section style={{width: "100%"}}>
       <BrowserRouter>
         <div className="main-div">
           <SideNavBar />
-          <main>
+          <main style={{width:"100%"}}>
             <Routes>
               <Route path="*" element={<NaoEncontrado />} />
               <Route path="/" element={<Overview />} />
