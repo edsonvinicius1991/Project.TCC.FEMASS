@@ -1,5 +1,5 @@
 import "./Equipments.css"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Modal, Input } from 'react-bootstrap';
 
 function Equipments() {
@@ -9,8 +9,20 @@ function Equipments() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [equipments, setEquipments] = useState([]);
+
+    //UseEffect
+    useEffect(()=>{
+        fetch("http://localhost:8080/equipment")
+        .then(resp => resp.json())
+        .then(data => setEquipments(data));
+    }, []);
+
+
+
     return (
         <div class="container ">
+            
             <h1 style={{ margin: "50px 25px" }}>EQUIPMENTS</h1>
             <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded" >
                 <div class="row ">
