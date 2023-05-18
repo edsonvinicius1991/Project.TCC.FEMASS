@@ -22,7 +22,7 @@ function App() {
             <Routes>
               <Route path="*" element={<NaoEncontrado />} />
               <Route path="/" element={<Overview />} />
-              <Route path="/equipments" element={<Equipments />} />
+              <Route path="/equipments" element={<Equipments/>} />
               <Route path="/wirelineunits" element={<NaoEncontrado />} />
               <Route path="/cables" element={<NaoEncontrado />} />
               <Route path="/orders" element={<NaoEncontrado />} />
