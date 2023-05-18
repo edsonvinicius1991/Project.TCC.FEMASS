@@ -2,6 +2,9 @@ import "./Equipments.css"
 import { useState, useEffect } from 'react';
 import { Button, Modal, Input } from 'react-bootstrap';
 
+import Tabela from "./Tabela"
+
+{/* <!--- Equipments---> */ }
 function Equipments() {
 
     const [show, setShow] = useState(false);
@@ -11,18 +14,54 @@ function Equipments() {
 
     const [equipments, setEquipments] = useState([]);
 
-    //UseEffect
-    useEffect(()=>{
+    useEffect(() => {
         fetch("http://localhost:8080/equipment")
-        .then(resp => resp.json())
-        .then(data => setEquipments(data));
+            .then(resp => resp.json())
+            .then(data => setEquipments(data));
     }, []);
 
+    {/* <!--- Containers select box---> */ }
+
+    const [containers, setContainers] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:8080/container/', {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                setContainers(data)
+            })
+            .catch((err) => console.log(err))
+
+    }, [])
+
+    {/* <!--- Location select box---> */ }
+
+    const [location, setLocation] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:8080/location/', {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                setLocation(data)
+            })
+            .catch((err) => console.log(err))
+
+    }, [])
 
 
     return (
         <div class="container ">
-            
+
             <h1 style={{ margin: "50px 25px" }}>EQUIPMENTS</h1>
             <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded" >
                 <div class="row ">
@@ -41,115 +80,9 @@ function Equipments() {
                             </form>
                         </div>
                     </div>
-
-
                 </div>
-                <div class="row">
-                    <div class="table-responsive " >
-                        <table class="table table-striped table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Asset </th>
-                                    <th>Description</th>
-                                    <th>Due Date </th>
-                                    <th>Container</th>
-                                    <th>Location</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>Rual Octo</td>
-                                    <td>Deban Steet</td>
-                                    <td>Newyork</td>
-                                    <td>USA</td>
-                                    <td>USA</td>
-                                    <td>
-                                        <a href="#" class="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i class="material-icons">&#xE417;</i></a>
-                                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                        <a href="#" class="delete" title="Delete" data-toggle="tooltip" style={{ color: "red" }}><i class="material-icons">&#xE872;</i></a>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Demark</td>
-                                    <td>City Road.13</td>
-                                    <td>Dubai</td>
-                                    <td>UAE</td>
-                                    <td>USA</td>
-                                    <td>
-                                        <a href="#" class="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i class="material-icons">&#xE417;</i></a>
-                                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                        <a href="#" class="delete" title="Delete" data-toggle="tooltip" style={{ color: "red" }}><i class="material-icons">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Richa Deba</td>
-                                    <td>Ocol Str. 57</td>
-                                    <td>Berlin</td>
-                                    <td>Germany</td>
-                                    <td>USA</td>
-                                    <td>
-                                        <a href="#" class="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i class="material-icons">&#xE417;</i></a>
-                                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                        <a href="#" class="delete" title="Delete" data-toggle="tooltip" style={{ color: "red" }}><i class="material-icons">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>4</td>
-                                    <td>James Cott</td>
-                                    <td>Berut Road</td>
-                                    <td>Paris</td>
-                                    <td>France</td>
-                                    <td>USA</td>
-                                    <td>
-                                        <a href="#" class="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i class="material-icons">&#xE417;</i></a>
-                                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                        <a href="#" class="delete" title="Delete" data-toggle="tooltip" style={{ color: "red" }}><i class="material-icons">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td>5</td>
-                                    <td>Dheraj</td>
-                                    <td>Bulf Str. 57</td>
-                                    <td>Delhi</td>
-                                    <td>India</td>
-                                    <td>USA</td>
-                                    <td>
-                                        <a href="#" class="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i class="material-icons">&#xE417;</i></a>
-                                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                        <a href="#" class="delete" title="Delete" data-toggle="tooltip" style={{ color: "red" }}><i class="material-icons">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td>6</td>
-                                    <td>Maria James</td>
-                                    <td>Obere Str. 57</td>
-                                    <td>Tokyo</td>
-                                    <td>Japan</td>
-                                    <td>USA</td>
-                                    <td>
-                                        <a href="#" class="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i class="material-icons">&#xE417;</i></a>
-                                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                        <a href="#" class="delete" title="Delete" data-toggle="tooltip" style={{ color: "red" }}><i class="material-icons">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <Tabela vetor={equipments} />
 
                 {/* <!--- Model Box ---> */}
                 <div className="model_box">
@@ -165,16 +98,37 @@ function Equipments() {
                         <Modal.Body>
                             <form>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" />
+                                    <input type="asset" class="form-control" id="assetInput" aria-describedby="assetHelp" placeholder="Enter Asset ID" />
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Country" />
+                                    <input type="description" class="form-control" id="descriptionInput" aria-describedby="descriptionHelp" placeholder="Enter Description" />
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter City" />
+                                    <div><label class="col-form-label"> Expiration date: </label></div>
+                                    <input type="date" class="form-control" id="inputDuedate" aria-describedby="dueDateHelp" placeholder="Enter Expiracion Date" />
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Country" />
+                                    <div><label class="col-form-label"> Container: </label></div>
+                                    <select class="form-control">
+                                        <option>Selecione uma opção</option>
+                                        {containers.map((option) => (
+                                            <option value={option.idContainer} key={option.idContainer}>
+                                                {option.idContainer}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div class="form-group mt-3">
+                                    <div><label> Location: </label></div>
+                                    <select class="form-control">
+                                        <option>Selecione uma opção</option>
+                                        {location.map((option) => (
+                                            <option value={option.idLocation} key={option.idLocation}>
+                                                {option.rig}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
 
                                 <button type="submit" class="btn btn-success mt-4">Add Record</button>
