@@ -1,5 +1,4 @@
 import './App.css';
-import Cards from './components/cards/Cards';
 import Overview from "./components/overview/Overview";
 import SideNavBar from "./components/sideNavBar/SideNavBar"
 import NaoEncontrado from './components/NaoEncontrado'

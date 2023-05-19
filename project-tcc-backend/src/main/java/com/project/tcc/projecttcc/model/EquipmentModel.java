@@ -1,7 +1,7 @@
 package com.project.tcc.projecttcc.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.*;
 
 
@@ -17,11 +17,13 @@ public class EquipmentModel implements Serializable{
     @Column(nullable = false, length = 70)
     private String partNumber;
     @Column(nullable = true)
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
+    
     
     @ManyToOne
     @JoinColumn(name = "idContainer")
     private ContainerModel container;
+    
     
     @ManyToOne
     @JoinColumn(name = "idLocation")
@@ -55,11 +57,11 @@ public class EquipmentModel implements Serializable{
         this.partNumber = partNumber;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 

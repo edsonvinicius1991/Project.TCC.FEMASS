@@ -1,6 +1,6 @@
 package com.project.tcc.projecttcc.model;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 
@@ -14,7 +14,7 @@ public class ContainerModel implements Serializable{
     @Id
     private String idContainer;
     @Column(nullable = true)
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
     @Column(nullable = true)
     private String containerType;
 
@@ -34,11 +34,11 @@ public class ContainerModel implements Serializable{
         this.idContainer = idContainer;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 

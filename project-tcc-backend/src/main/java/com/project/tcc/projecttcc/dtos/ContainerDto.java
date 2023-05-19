@@ -1,6 +1,6 @@
 package com.project.tcc.projecttcc.dtos;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 
 import com.project.tcc.projecttcc.model.LocationModel;
@@ -11,7 +11,7 @@ public class ContainerDto {
     @NotBlank
     private String idContainer;
     
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     private String containerType;
 
@@ -25,11 +25,11 @@ public class ContainerDto {
         this.idContainer = idContainer;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
