@@ -1,12 +1,22 @@
 import "./Equipments.css";
 
-function Tabela({ vetor }) {
+function Tabela({ vetor, handleRemove }) {
+
+    const remover = (e) => {
+        e.preventDefault()
+        handleRemove()
+    }
+
+    const remove = (id) =>{
+        handleRemove(id)
+    }
+
 
     return (
 
         <div className="row">
             <div className="table-responsive ">
-                <table class="table table-striped table-hover table-bordered">
+                <table className="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -28,10 +38,10 @@ function Tabela({ vetor }) {
                                     <td>{obj.dueDate}</td>
                                     <td>{obj.container.idContainer}</td>
                                     <td>{obj.location.rig}</td>
-                                    <td>
-                                        <a href="#" class="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i class="material-icons">&#xE417;</i></a>
-                                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                        <a href="#" class="delete" title="Delete" data-toggle="tooltip" style={{ color: "red" }}><i class="material-icons">&#xE872;</i></a>
+                                    <td >
+                                        <a href="#" className="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i className="material-icons" >&#xE417;</i></a>
+                                        <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons">&#xE254;</i></a>
+                                        <a href="#" className="delete" id={obj.assetId} onClick={() => {remove(obj.assetId)}} title="Delete" data-toggle="tooltip" style={{ color: "red" }}><i className="material-icons">&#xE872;</i></a>
                                     </td>
                                 </tr>
                             ))
