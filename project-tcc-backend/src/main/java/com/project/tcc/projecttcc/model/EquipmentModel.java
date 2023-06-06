@@ -18,12 +18,12 @@ public class EquipmentModel implements Serializable{
     private String partNumber;
     @Column(nullable = true)
     private LocalDate dueDate;
-    
+    @Column(nullable = true)
+    private String serialNumber;
     
     @ManyToOne
     @JoinColumn(name = "idContainer")
-    private ContainerModel container;
-    
+    private ContainerModel container;    
     
     @ManyToOne
     @JoinColumn(name = "idLocation")
@@ -63,6 +63,13 @@ public class EquipmentModel implements Serializable{
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public ContainerModel getContainer() {

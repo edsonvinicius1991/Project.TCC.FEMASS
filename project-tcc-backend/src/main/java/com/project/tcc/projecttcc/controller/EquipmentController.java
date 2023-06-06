@@ -46,10 +46,11 @@ public class EquipmentController {
     }
     /*
     {
-        "assetId": "2135213",
-        "description": "4462EA",
+        "assetId": "12345678",
+        "description": "4462EA - MRCH ELETRONIC",
         "partNumber": "F333333",
         "dueDate": "2022-12-25T21:20:00",
+        "serialNumber": "4462MA",
     
         "container": {
         "idContainer": "TB301"

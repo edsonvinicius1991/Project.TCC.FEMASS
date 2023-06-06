@@ -17,7 +17,10 @@ public class EquipmentDto {
     private String partNumber;
     
     private LocalDate dueDate;
+
+    private String serialNumber;
     
+
     private ContainerModel container;
     
     private LocationModel location;
@@ -52,6 +55,14 @@ public class EquipmentDto {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public ContainerModel getContainer() {
