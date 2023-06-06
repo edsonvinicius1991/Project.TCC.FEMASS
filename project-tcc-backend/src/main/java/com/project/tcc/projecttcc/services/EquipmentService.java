@@ -2,16 +2,19 @@ package com.project.tcc.projecttcc.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.project.tcc.projecttcc.model.EquipmentModel;
 import com.project.tcc.projecttcc.repositories.EquipmentRepository;
 
+
 @Service
 public class EquipmentService {
+
+    @Autowired
+    
 
     final EquipmentRepository equipmentRepository;
 

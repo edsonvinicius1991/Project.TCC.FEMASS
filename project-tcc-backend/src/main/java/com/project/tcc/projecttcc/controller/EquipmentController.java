@@ -41,7 +41,7 @@ public class EquipmentController {
     
     @PostMapping ("/add")
     //public ResponseEntity<?> saveEquipment(@RequestBody @Valid EquipmentDto equipmentDto){  *Validação pelo spring
-    public ResponseEntity<?> saveEquipment(@RequestBody @Valid EquipmentDto equipmentDto){    
+    public ResponseEntity<?> saveEquipment(@RequestBody EquipmentDto equipmentDto){    
         var equipmentModel = new EquipmentModel();
         BeanUtils.copyProperties(equipmentDto, equipmentModel);
         
@@ -54,10 +54,25 @@ public class EquipmentController {
             return new ResponseEntity<RespostaModel>(resposta, HttpStatus.BAD_REQUEST);
 
         }else
-            return ResponseEntity.status(HttpStatus.CREATED).body(((Object) equipmentService.save(equipmentModel)));
-        
+            return ResponseEntity.status(HttpStatus.CREATED).body(((Object) equipmentService.save(equipmentModel)));        
 
     }
+    /*
+    {
+    "assetId": "27666767",
+    "description": "4461XA",
+    "partNumber": "F333333",
+    "dueDate": "2022-12-20",
+    "serialNumber": "",
+    
+    "container": {
+        "idContainer": "TB301"
+    },
+    "location":{
+        "idLocation": "1"
+    }
+}
+     */
         
     @GetMapping
     public ResponseEntity<List<EquipmentModel>> getAllEquipment(){
