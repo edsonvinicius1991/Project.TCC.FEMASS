@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.tcc.projecttcc.dtos.EquipmentDto;
 import com.project.tcc.projecttcc.model.EquipmentModel;
+import com.project.tcc.projecttcc.model.RespostaModel;
 import com.project.tcc.projecttcc.services.EquipmentService;
 
 @RestController
@@ -27,6 +29,8 @@ import com.project.tcc.projecttcc.services.EquipmentService;
 @RequestMapping ("/equipment")
 
 public class EquipmentController {
+    @Autowired
+    private RespostaModel resposta;
     
     final EquipmentService equipmentService;
 
@@ -36,31 +40,25 @@ public class EquipmentController {
     
     
     @PostMapping ("/add")
-    public ResponseEntity<Object> saveEquipment(@RequestBody @Valid EquipmentDto equipmentDto){
-
+    //public ResponseEntity<?> saveEquipment(@RequestBody @Valid EquipmentDto equipmentDto){  *Validação pelo spring
+    public ResponseEntity<?> saveEquipment(@RequestBody @Valid EquipmentDto equipmentDto){    
         var equipmentModel = new EquipmentModel();
         BeanUtils.copyProperties(equipmentDto, equipmentModel);
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(((Object) equipmentService.save(equipmentModel)));
+        if(equipmentDto.getAssetId().equals("")){
+            resposta.setMessage("AssetID is required.");
+            return new ResponseEntity<RespostaModel>(resposta, HttpStatus.BAD_REQUEST);
+        
+        }else if(equipmentDto.getDescription().equals("")){
+            resposta.setMessage("Description is required.");
+            return new ResponseEntity<RespostaModel>(resposta, HttpStatus.BAD_REQUEST);
+
+        }else
+            return ResponseEntity.status(HttpStatus.CREATED).body(((Object) equipmentService.save(equipmentModel)));
+        
 
     }
-    /*
-    {
-        "assetId": "12345678",
-        "description": "4462EA - MRCH ELETRONIC",
-        "partNumber": "F333333",
-        "dueDate": "2022-12-25T21:20:00",
-        "serialNumber": "4462MA",
-    
-        "container": {
-        "idContainer": "TB301"
-        },
-        "location":{
-        "idLocation": "2"
-        }
-    }
-     */
-    
+        
     @GetMapping
     public ResponseEntity<List<EquipmentModel>> getAllEquipment(){
         return ResponseEntity.status(HttpStatus.OK).body(equipmentService.findAll());
