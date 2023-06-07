@@ -39,7 +39,6 @@ function Equipments() {
         })
         .then((resp) => resp.json())
         .then(
-            alert("Produto deletedado com sucesso!"),
             navigate(0)
                         
         )
@@ -63,12 +62,13 @@ function Equipments() {
         <div className="container ">
             
             <h1 style={{ margin: "50px 25px" }}>EQUIPMENTS</h1>
-            <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded" >
+            <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded"  >
                 <div className="row ">
 
-                    <div className="col-sm-3 offset-sm-0  mt-5 mb-4 text-gred">
-                        <Button variant="primary" onClick={handleShow}>
-                            Add New Equipment
+                    <div className="col-sm-3 offset-sm-0  mt-5 mb-4 text-gred" >
+                        <Button variant="success" onClick={handleShow} style={{ fontSize:"18px"}}>
+                            <i className="bi bi-plus" style={{ fontSize:"30px" , marginRight: "1rem"}}></i>
+                            <b>New Equipment</b>
                         </Button>
                         
                     </div>

@@ -56,6 +56,7 @@ function ModalAdd({
         description: '',
         partNumber: '',
         dueDate: '',
+        serialNumber: '',
         container: '',
         location: ''
     });
@@ -68,7 +69,6 @@ function ModalAdd({
         setEquipment({
             ...equipment, container: {
                 idContainer: event.target.options[event.target.selectedIndex].text,
-
             },
         })
     }
@@ -78,14 +78,12 @@ function ModalAdd({
             ...equipment, location: {
                 idLocation: event.target.value,
                 rig: event.target.options[event.target.selectedIndex].text,
-
             },
         })
     }
 
     const navigate = useNavigate()
 
-    
 
     function handleFormSubmit(event) {
         event.preventDefault();
@@ -97,13 +95,15 @@ function ModalAdd({
             },
             body: JSON.stringify(equipment),
         }).then((resp) => resp.json())
-            .then((data) => {
+                .then((data) => {
                 console.log(data)
-
-                
-                alert("Equipamento adicionado com sucesso!")
-                navigate(0, { message: 'Projeto criado com sucesso!' })
-                
+                if(data.message !== undefined){
+                    alert(data.message);
+                }else if(data.error !== "Bad Request") {              
+                    alert("Equipamento adicionado com sucesso!")
+                    navigate(0)
+                }else
+                alert("Preencha os campos obrigatórios: (*)\n" + "Asset ID*\n" + "Description*")
             })
             .catch(err => alert(err))
 
@@ -119,6 +119,7 @@ function ModalAdd({
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
+            value
 
         >
             <Modal.Header closeButton>
@@ -135,6 +136,7 @@ function ModalAdd({
                             className="form-control"
                             onChange={handleInputChange}
                             placeholder="Enter Asset ID"
+                            
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -145,6 +147,16 @@ function ModalAdd({
                             className="form-control"
                             onChange={handleInputChange}
                             placeholder="Enter Description"
+                        />
+                    </div>
+                    <div className="form-group mt-3">
+                        <div><label className="col-form-label"> Serial Number </label></div>
+                        <input
+                            type="text"
+                            name="serialNumber"
+                            className="form-control"
+                            onChange={handleInputChange}
+                            placeholder="Enter Serial Number"
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -169,11 +181,11 @@ function ModalAdd({
                         />
                     </div>
                     <div className="form-group mt-3">
-                        <div><label className="col-form-label"> Container </label></div>
+                        <div><label className="col-form-label"> Container * </label></div>
                         <select
                             className="form-control"
                             name="container"
-                            onChange={handleSelectContainer}
+                            onChange={handleSelectContainer}                            
                         >
                             <option>Selecione uma opção</option>
                             {containers.map((option) => (
@@ -185,11 +197,12 @@ function ModalAdd({
                     </div>
 
                     <div className="form-group mt-3">
-                        <div><label> Location: </label></div>
+                        <div><label> Location * </label></div>
                         <select
                             className="form-control"
                             name="location"
-                            onChange={handleSelectLocation}  >
+                            onChange={handleSelectLocation}
+                        >
 
                             <option>Selecione uma opção</option>
                             {location.map((option) => (
@@ -199,11 +212,12 @@ function ModalAdd({
                             ))}
                         </select>
                     </div>
-
-                    <button type="submit" className="btn btn-success mt-4"  >Add Record</button>
+                    <div>
+                        <button type="submit" className="btn btn-success mt-4"  >Add Record</button>
+                    </div>            
+                    
                 </form>
             </Modal.Body>
-
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Close

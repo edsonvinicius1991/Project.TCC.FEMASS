@@ -57,23 +57,7 @@ public class EquipmentController {
             return ResponseEntity.status(HttpStatus.CREATED).body(((Object) equipmentService.save(equipmentModel)));        
 
     }
-    /*
-    {
-    "assetId": "27666767",
-    "description": "4461XA",
-    "partNumber": "F333333",
-    "dueDate": "2022-12-20",
-    "serialNumber": "",
     
-    "container": {
-        "idContainer": "TB301"
-    },
-    "location":{
-        "idLocation": "1"
-    }
-}
-     */
-        
     @GetMapping
     public ResponseEntity<List<EquipmentModel>> getAllEquipment(){
         return ResponseEntity.status(HttpStatus.OK).body(equipmentService.findAll());
@@ -95,9 +79,9 @@ public class EquipmentController {
         if(!equipmentModelOptional.isPresent()){ //Case: If id not found!
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Equipment not found.");
         }
-        
+        resposta.setMessage("Equipment was deleted");
         equipmentService.delete(equipmentModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Equipment deleted sucessfully.");
+        return ResponseEntity.status(HttpStatus.OK).body(resposta);
 
     }
 
