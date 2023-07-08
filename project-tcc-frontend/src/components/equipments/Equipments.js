@@ -85,7 +85,7 @@ function Equipments() {
 
                 {message && <Message msg={message} typeMsg={typeMsg} />}
 
-                <Tabela vetor={equipments} handleRemove={removeEquipment} />
+                <Tabela vetor={equipments} handleRemove={removeEquipment} handleShow={handleShow} />
 
                 {/* <!--- Model Box ---> */}
                 <div className="model_box">
