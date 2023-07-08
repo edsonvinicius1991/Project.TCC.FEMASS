@@ -16,7 +16,7 @@ function Tabela({ vetor, handleRemove, handleEdit, handleShow }) {
         <div className="row">
             <div className="table-responsive ">
                 <table className="table table-striped table-hover table-bordered">
-                    <thead>d
+                    <thead>
                         <tr>
                             <th>#</th>
                             <th>Asset </th>
