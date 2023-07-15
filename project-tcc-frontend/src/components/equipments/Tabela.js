@@ -2,8 +2,9 @@ import "./Equipments.css";
 
 function Tabela({ vetor, handleRemove, handleEdit, handleShow }) {
 
-    const edit = (id) =>{
-        handleEdit(id)
+    const edit = (obj) =>{
+        console.log(obj)
+        handleShow(obj)
     }
 
     const remove = (id) =>{
@@ -39,7 +40,7 @@ function Tabela({ vetor, handleRemove, handleEdit, handleShow }) {
                                     <td>{obj.location.rig}</td>
                                     <td >
                                         {/*<a href="#" className="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i className="material-icons" >&#xE417;</i></a>*/}
-                                        <button href="#" className="btn btn-primary" id={obj.assetId} onClick={handleShow} title="Edit" data-toggle="tooltip" style={{ marginRight: "0.5rem", padding: "0.2rem 0.7rem" }}><i className="material-icons">&#xE254;</i></button>
+                                        <button href="#" className="btn btn-primary" id={obj.assetId} onClick={(e) =>{edit(obj.assetId, e)}} title="Edit" data-toggle="tooltip" style={{ marginRight: "0.5rem", padding: "0.2rem 0.7rem" }}><i className="material-icons">&#xE254;</i></button>
                                         <button href="#" className="btn btn-danger" id={obj.assetId} onClick={() =>  {if(window.confirm('Are you sure to delete this equipment?')){remove(obj.assetId)}}} title="Delete" data-toggle="tooltip" style={{ color: "white", marginRight: "0.5rem", padding: "0.2rem 0.7rem" }}><i className="material-icons" >&#xE872;</i></button>
                                     </td>
                                 </tr>
