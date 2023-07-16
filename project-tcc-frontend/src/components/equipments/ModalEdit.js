@@ -5,11 +5,7 @@ import { useState, useEffect } from 'react';
 
 import { Button, Modal } from 'react-bootstrap';
 
-function ModalAdd({
-    show,
-    handleClose
-
-}) {
+function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
 
 
     {/* <!--- Containers select box---> */ }
@@ -115,15 +111,15 @@ function ModalAdd({
 
 
         <Modal
-            show={show}
-            onHide={handleClose}
+            show={showModalEdit}
+            onHide={handleCloseModalEdit}
             backdrop="static"
             keyboard={false}
             value
 
         >
             <Modal.Header closeButton>
-                <Modal.Title>Add Equipment</Modal.Title>
+                <Modal.Title>Edit Equipment</Modal.Title>
             </Modal.Header>
             <Modal.Body>
 
@@ -219,7 +215,7 @@ function ModalAdd({
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleCloseModalEdit}>
                     Close
                 </Button>
 
@@ -228,4 +224,4 @@ function ModalAdd({
 
     )
 };
-export default ModalAdd;
+export default ModalEdit;

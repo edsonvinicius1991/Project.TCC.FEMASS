@@ -1,24 +1,35 @@
 import "./Equipments.css"
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 import Tabela from "./Tabela"
 import ModalAdd from "./ModalAdd"
-import Message from "../commons/Message"
+import ModalEdit from "./ModalEdit";
 
 
 
 function Equipments() {
 
     const navigate = useNavigate()
+    var obj2
 
-    {/* <!--- Modal---> */ }
+    {/* <!--- ModalAdd---> */ }
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+     {/* <!--- ModalEdit---> */ }
+    const [showModalEdit, setShowModalEdit] = useState(false);
+
+    const handleCloseModalEdit = () => setShowModalEdit(false);
+    function handleShowModalEdit (obj) {
+        obj2={obj}
+        console.log(obj2)
+        setShowModalEdit(true)
+    }
 
     {/* <!--- Tabela Equipments---> */ }
     const [equipments, setEquipments] = useState([]);
@@ -47,13 +58,6 @@ function Equipments() {
 
     }
 
-    const location = useLocation()
-    let message = ''
-    let typeMsg = ''
-    if (location.state) {
-        message = location.state.message
-        
-    }
 
     
     
@@ -82,17 +86,24 @@ function Equipments() {
                         </div>
                     </div>
                 </div>
+                
+                <Tabela vetor={equipments} handleRemove={removeEquipment} handleShow={handleShow} handleEdit={handleShowModalEdit} />
 
-                {message && <Message msg={message} typeMsg={typeMsg} />}
-
-                <Tabela vetor={equipments} handleRemove={removeEquipment} handleShow={handleShow} />
-
-                {/* <!--- Model Box ---> */}
+                {/* <!--- ModelAdd Box ---> */}
                 <div className="model_box">
                     <ModalAdd                         
                         show= {show}
                         handleClose= {handleClose}
-                                            
+                        obj= {obj2}                    
+                    />
+                </div>
+
+                {/* <!--- ModelAdd Box ---> */}
+                <div className="model_box">
+                    <ModalEdit                         
+                        showModalEdit= {showModalEdit}
+                        handleCloseModalEdit= {handleCloseModalEdit}
+                        obj={obj2}                                                              
                     />
                 </div>
             </div>
