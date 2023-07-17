@@ -1,13 +1,14 @@
 import "./Equipments.css";
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 
 import { Button, Modal } from 'react-bootstrap';
 
-function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
+function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
 
-
+    console.log(id)
+    
     {/* <!--- Containers select box---> */ }
 
     const [containers, setContainers] = useState([])
@@ -56,6 +57,19 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
         container: '',
         location: ''
     });
+    
+    {/*useEffect(() => {
+        fetch(`http://localhost:8080/equipment/${id}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+            },    
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+            setEquipment(data)
+        })
+    }) */ }
 
     function handleInputChange(event) {
         setEquipment({ ...equipment, [event.target.name]: event.target.value })
@@ -131,7 +145,8 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             name="assetId"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Asset ID"
+                            //placeholder= "{equipment.assetId}"
+                            value= {id.assetId} 
 
                         />
                     </div>
@@ -142,7 +157,8 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             name="description"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Description"
+                            //placeholder="Enter Description"
+                            value= {id.description} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -152,7 +168,8 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             name="serialNumber"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Serial Number"
+                            //placeholder="Enter Serial Number"
+                            value= {id.serialNumber} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -162,7 +179,8 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             name="partNumber"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Part number"
+                            //placeholder="Enter Part number"
+                            value= {id.partNumber} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -172,7 +190,8 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             name="dueDate"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Expiration Date"
+                            //placeholder="Enter Expiration Date"
+                            value= {id.dueDate} 
 
                         />
                     </div>

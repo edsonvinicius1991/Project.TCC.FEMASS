@@ -1,5 +1,5 @@
 import "./Equipments.css"
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 
@@ -13,7 +13,8 @@ import ModalEdit from "./ModalEdit";
 function Equipments() {
 
     const navigate = useNavigate()
-    var obj2
+    var id2
+
 
     {/* <!--- ModalAdd---> */ }
     const [show, setShow] = useState(false);
@@ -23,13 +24,15 @@ function Equipments() {
 
      {/* <!--- ModalEdit---> */ }
     const [showModalEdit, setShowModalEdit] = useState(false);
+    const [idSelecionado, setIdSelecionado] = useState(null)
 
     const handleCloseModalEdit = () => setShowModalEdit(false);
-    function handleShowModalEdit (obj) {
-        obj2={obj}
-        console.log(obj2)
-        setShowModalEdit(true)
+    const handleShowModalEdit = id => {
+        setIdSelecionado(id);
+        console.log(idSelecionado);
+        setShowModalEdit(true);
     }
+        
 
     {/* <!--- Tabela Equipments---> */ }
     const [equipments, setEquipments] = useState([]);
@@ -93,8 +96,7 @@ function Equipments() {
                 <div className="model_box">
                     <ModalAdd                         
                         show= {show}
-                        handleClose= {handleClose}
-                        obj= {obj2}                    
+                        handleClose= {handleClose}                                           
                     />
                 </div>
 
@@ -103,7 +105,7 @@ function Equipments() {
                     <ModalEdit                         
                         showModalEdit= {showModalEdit}
                         handleCloseModalEdit= {handleCloseModalEdit}
-                        obj={obj2}                                                              
+                        id= {idSelecionado}                                                            
                     />
                 </div>
             </div>
