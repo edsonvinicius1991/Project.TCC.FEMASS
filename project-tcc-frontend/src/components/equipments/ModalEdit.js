@@ -3,7 +3,7 @@ import "./Equipments.css";
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
 
@@ -234,17 +234,12 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                         </select>
                     </div>
                     <div>
-                        <button type="submit" className="btn btn-success mt-4"  >Update</button>
+                        <button type="submit" className="btn btn-success mt-4"  >Save Changes</button>
+                        <button type="button" className="btn btn-secondary mt-4"  data-dismiss="modal" onClick={handleCloseModalEdit} style={{marginLeft: "6px"}}>Cancel</button>
                     </div>
 
                 </form>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModalEdit}>
-                    Close
-                </Button>
-
-            </Modal.Footer>
         </Modal>
 
     )
