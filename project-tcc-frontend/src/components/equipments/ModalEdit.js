@@ -1,14 +1,15 @@
 import "./Equipments.css";
 
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 
 import { Button, Modal } from 'react-bootstrap';
 
-function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
+function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
 
-    console.log(id)
-    
+    let id = 0
+    { obj !== null ? id = obj.assetId : id = null } //Recebendo AssetId do objeto vindo botão edit
+
     {/* <!--- Containers select box---> */ }
 
     const [containers, setContainers] = useState([])
@@ -32,6 +33,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
 
     const [location, setLocation] = useState([])
 
+
     useEffect(() => {
         fetch('http://localhost:8080/location/', {
             method: "GET",
@@ -46,6 +48,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
             .catch((err) => console.log(err))
 
     }, [])
+
     {/* <!--- Cadastro equipment---> */ }
 
     const [equipment, setEquipment] = useState({
@@ -57,19 +60,21 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
         container: '',
         location: ''
     });
-    
-    {/*useEffect(() => {
+
+    useEffect(() => {
         fetch(`http://localhost:8080/equipment/${id}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
-            },    
+            },
         })
-        .then((resp) => resp.json())
-        .then((data) => {
-            setEquipment(data)
-        })
-    }) */ }
+            .then((resp) => resp.json())
+            .then((data) => {
+                console.log(data)
+                setEquipment(data)
+            })
+    }, [id])
+
 
     function handleInputChange(event) {
         setEquipment({ ...equipment, [event.target.name]: event.target.value })
@@ -98,8 +103,8 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
     function handleFormSubmit(event) {
         event.preventDefault();
 
-        fetch("http://localhost:8080/equipment/add", {
-            method: "POST",
+        fetch(`http://localhost:8080/equipment/${equipment.assetId}`, {
+            method: "PUT",
             headers: {
                 'Content-type': "application/json",
             },
@@ -110,7 +115,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
                 if (data.message !== undefined) {
                     alert(data.message);
                 } else if (data.error !== "Bad Request") {
-                    alert("Equipamento adicionado com sucesso!")
+                    alert("Equipamento aLTERADO com sucesso!")
                     navigate(0)
                 } else
                     alert("Preencha os campos obrigatórios: (*)\n" + "Asset ID*\n" + "Description*")
@@ -145,8 +150,9 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
                             name="assetId"
                             className="form-control"
                             onChange={handleInputChange}
-                            //placeholder= "{equipment.assetId}"
-                            value= {id.assetId} 
+                            //placeholder= "Enter AssetId"
+                            value= {equipment.assetId}
+                            disabled={true}
 
                         />
                     </div>
@@ -158,7 +164,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder="Enter Description"
-                            value= {id.description} 
+                            value= {equipment.description} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -169,7 +175,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder="Enter Serial Number"
-                            value= {id.serialNumber} 
+                            value= {equipment.serialNumber} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -180,7 +186,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder="Enter Part number"
-                            value= {id.partNumber} 
+                            value= {equipment.partNumber} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -191,7 +197,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, id}) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder="Enter Expiration Date"
-                            value= {id.dueDate} 
+                            value= {equipment.dueDate} 
 
                         />
                     </div>

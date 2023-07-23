@@ -13,7 +13,7 @@ import ModalEdit from "./ModalEdit";
 function Equipments() {
 
     const navigate = useNavigate()
-    var id2
+    
 
 
     {/* <!--- ModalAdd---> */ }
@@ -24,12 +24,11 @@ function Equipments() {
 
      {/* <!--- ModalEdit---> */ }
     const [showModalEdit, setShowModalEdit] = useState(false);
-    const [idSelecionado, setIdSelecionado] = useState(null)
+    const [objSelecionado, setObjSelecionado] = useState(null)
 
     const handleCloseModalEdit = () => setShowModalEdit(false);
-    const handleShowModalEdit = id => {
-        setIdSelecionado(id);
-        console.log(idSelecionado);
+    const handleShowModalEdit = obj => {
+        setObjSelecionado(obj);
         setShowModalEdit(true);
     }
         
@@ -105,7 +104,7 @@ function Equipments() {
                     <ModalEdit                         
                         showModalEdit= {showModalEdit}
                         handleCloseModalEdit= {handleCloseModalEdit}
-                        id= {idSelecionado}                                                            
+                        obj= {objSelecionado}                                                            
                     />
                 </div>
             </div>

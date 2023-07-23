@@ -2,8 +2,9 @@ import "./Equipments.css";
 
 function Tabela({ vetor, handleRemove, handleEdit, handleShow }) {
 
-    const edit = (id) =>{
-        handleEdit(id)
+    const edit = (obj) =>{
+        console.log(obj)
+        handleEdit(obj)
     }
 
     const remove = (id) =>{
