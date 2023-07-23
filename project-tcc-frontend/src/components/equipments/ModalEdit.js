@@ -70,8 +70,8 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
         })
             .then((resp) => resp.json())
             .then((data) => {
-                console.log(data)
                 setEquipment(data)
+                console.log(equipment)
             })
     }, [id])
 
@@ -115,7 +115,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                 if (data.message !== undefined) {
                     alert(data.message);
                 } else if (data.error !== "Bad Request") {
-                    alert("Equipamento aLTERADO com sucesso!")
+                    alert("Equipamento alterado com sucesso!")
                     navigate(0)
                 } else
                     alert("Preencha os campos obrigatórios: (*)\n" + "Asset ID*\n" + "Description*")
@@ -208,7 +208,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             name="container"
                             onChange={handleSelectContainer}
                         >
-                            <option>Selecione uma opção</option>
+                            <option disabled={true} style={{backgroundColor: "lightblue"}}>{equipment.container.idContainer}</option>
                             {containers.map((option) => (
                                 <option value={option.idContainer} key={option.idContainer}>
                                     {option.idContainer}
@@ -225,7 +225,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             onChange={handleSelectLocation}
                         >
 
-                            <option>Selecione uma opção</option>
+<option disabled={true} style={{backgroundColor: "lightblue"}}>{equipment.location.rig}</option>
                             {location.map((option) => (
                                 <option value={option.idLocation} key={option.idLocation}>
                                     {option.rig}
