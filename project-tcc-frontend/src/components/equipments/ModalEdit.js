@@ -5,12 +5,10 @@ import { useState, useEffect } from 'react';
 
 import { Modal } from 'react-bootstrap';
 
-function ModalAdd({
-    show,
-    handleClose
+function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
 
-}) {
-
+    let id = 0
+    { obj !== null ? id = obj.assetId : id = null } //Recebendo AssetId do objeto vindo botão edit
 
     {/* <!--- Containers select box---> */ }
 
@@ -35,6 +33,7 @@ function ModalAdd({
 
     const [location, setLocation] = useState([])
 
+
     useEffect(() => {
         fetch('http://localhost:8080/location/', {
             method: "GET",
@@ -49,6 +48,7 @@ function ModalAdd({
             .catch((err) => console.log(err))
 
     }, [])
+
     {/* <!--- Cadastro equipment---> */ }
 
     const [equipment, setEquipment] = useState({
@@ -60,6 +60,21 @@ function ModalAdd({
         container: '',
         location: ''
     });
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/equipment/${id}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                setEquipment(data)
+                console.log(equipment)
+            })
+    }, [id])
+
 
     function handleInputChange(event) {
         setEquipment({ ...equipment, [event.target.name]: event.target.value })
@@ -88,8 +103,8 @@ function ModalAdd({
     function handleFormSubmit(event) {
         event.preventDefault();
 
-        fetch("http://localhost:8080/equipment/add", {
-            method: "POST",
+        fetch(`http://localhost:8080/equipment/${equipment.assetId}`, {
+            method: "PUT",
             headers: {
                 'Content-type': "application/json",
             },
@@ -100,10 +115,10 @@ function ModalAdd({
                 if (data.message !== undefined) {
                     alert(data.message);
                 } else if (data.error !== "Bad Request") {
-                    alert("Equipamento adicionado com sucesso!")
+                    alert(`Equipament [${equipment.assetId}] updated successfully!`)
                     navigate(0)
                 } else
-                    alert("Preencha os campos obrigatórios: (*)\n" + "Asset ID*\n" + "Description*")
+                    alert("Fill in the mandatory fields: (*)\n" + "Asset ID*\n" + "Description*\n" + "Container*\n" + "Location*")
             })
             .catch(err => alert(err))
 
@@ -115,15 +130,15 @@ function ModalAdd({
 
 
         <Modal
-            show={show}
-            onHide={handleClose}
+            show={showModalEdit}
+            onHide={handleCloseModalEdit}
             backdrop="static"
             keyboard={false}
             value
 
         >
             <Modal.Header closeButton>
-                <Modal.Title>Add Equipment</Modal.Title>
+                <Modal.Title>Edit Equipment</Modal.Title>
             </Modal.Header>
             <Modal.Body>
 
@@ -135,7 +150,9 @@ function ModalAdd({
                             name="assetId"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Asset ID"
+                            //placeholder= "Enter AssetId"
+                            value= {equipment.assetId}
+                            disabled={true}
 
                         />
                     </div>
@@ -146,7 +163,8 @@ function ModalAdd({
                             name="description"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Description"
+                            //placeholder="Enter Description"
+                            value= {equipment.description} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -156,7 +174,8 @@ function ModalAdd({
                             name="serialNumber"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Serial Number"
+                            //placeholder="Enter Serial Number"
+                            value= {equipment.serialNumber} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -166,7 +185,8 @@ function ModalAdd({
                             name="partNumber"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Part number"
+                            //placeholder="Enter Part number"
+                            value= {equipment.partNumber} 
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -176,7 +196,8 @@ function ModalAdd({
                             name="dueDate"
                             className="form-control"
                             onChange={handleInputChange}
-                            placeholder="Enter Expiration Date"
+                            //placeholder="Enter Expiration Date"
+                            value= {equipment.dueDate} 
 
                         />
                     </div>
@@ -187,7 +208,7 @@ function ModalAdd({
                             name="container"
                             onChange={handleSelectContainer}
                         >
-                            <option>Selecione uma opção</option>
+                            <option disabled={true} style={{backgroundColor: "lightblue"}}>{equipment.container.idContainer}</option>
                             {containers.map((option) => (
                                 <option value={option.idContainer} key={option.idContainer}>
                                     {option.idContainer}
@@ -204,7 +225,7 @@ function ModalAdd({
                             onChange={handleSelectLocation}
                         >
 
-                            <option>Selecione uma opção</option>
+<option disabled={true} style={{backgroundColor: "lightblue"}}>{equipment.location.rig}</option>
                             {location.map((option) => (
                                 <option value={option.idLocation} key={option.idLocation}>
                                     {option.rig}
@@ -213,8 +234,8 @@ function ModalAdd({
                         </select>
                     </div>
                     <div>
-                        <button type="submit" className="btn btn-success mt-4"  >Save</button>
-                        <button type="button" className="btn btn-secondary mt-4" data-dismiss="modal" onClick={handleClose} style={{ marginLeft: "6px" }}>Cancel</button>
+                        <button type="submit" className="btn btn-success mt-4"  >Save Changes</button>
+                        <button type="button" className="btn btn-secondary mt-4"  data-dismiss="modal" onClick={handleCloseModalEdit} style={{marginLeft: "6px"}}>Cancel</button>
                     </div>
 
                 </form>
@@ -223,4 +244,4 @@ function ModalAdd({
 
     )
 };
-export default ModalAdd;
+export default ModalEdit;
