@@ -115,10 +115,10 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                 if (data.message !== undefined) {
                     alert(data.message);
                 } else if (data.error !== "Bad Request") {
-                    alert("Equipamento alterado com sucesso!")
+                    alert(`Equipament [${equipment.assetId}] updated successfully!`)
                     navigate(0)
                 } else
-                    alert("Preencha os campos obrigatórios: (*)\n" + "Asset ID*\n" + "Description*")
+                    alert("Fill in the mandatory fields: (*)\n" + "Asset ID*\n" + "Description*\n" + "Container*\n" + "Location*")
             })
             .catch(err => alert(err))
 
@@ -234,7 +234,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                         </select>
                     </div>
                     <div>
-                        <button type="submit" className="btn btn-success mt-4"  >Add Record</button>
+                        <button type="submit" className="btn btn-success mt-4"  >Update</button>
                     </div>
 
                 </form>
