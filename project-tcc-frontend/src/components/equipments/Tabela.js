@@ -1,4 +1,4 @@
-import "./Equipments.css";
+//import "./Equipments.css";
 
 import { useState } from 'react';
 
@@ -15,19 +15,36 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
         handleRemove(id)
     }
 
+    let tipoBusca = ["AssetId", "Description", "Container", "Location"]
+
+    const [buscaCategoria, setBuscaCategoria] = useState('');
+
     const [busca, setBusca] = useState('');
 
     return (
 
         <div className="row">
             <form className="form-inline">
+                <select
+                    className="form-control"
+                    name="tipoBusca"
+                    onChange={(e) => setBuscaCategoria(e.target.value)}
+                >
+                    <option>All</option>
+                    {tipoBusca.map((option) => (
+                        <option value={option} key={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
                 <input
                     className="form-control mr-sm-2"
                     type="search"
-                    placeholder="Search Asset"
+                    placeholder="Search"
                     onChange={(e) => setBusca(e.target.value)} />
-                
+
             </form>
+            <div className="row"></div>
             <div className="table-responsive ">
                 <table className="table table-striped table-hover table-bordered">
                     <thead>
@@ -45,9 +62,23 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
                         {
                             vetorEquipments
                                 .filter((obj) => {
-                                    return busca.toLowerCase() === ''
-                                        ? obj
-                                        : obj.assetId.toLowerCase().includes(busca);
+                                    if (buscaCategoria === 'AssetId') {
+                                        return busca.toLowerCase() === ''
+                                            ? obj
+                                            : obj.assetId.toLowerCase().includes(busca);
+                                    } if (buscaCategoria === 'Description') {
+                                        return busca.toLowerCase() === ''
+                                            ? obj
+                                            : obj.description.toLowerCase().includes(busca);
+                                    } if (buscaCategoria === 'Location') {
+                                        return busca.toLowerCase() === ''
+                                            ? obj
+                                            : obj.location.rig.toLowerCase().includes(busca);
+                                    } if (buscaCategoria === 'Container') {
+                                        return busca.toLowerCase() === ''
+                                            ? obj
+                                            : obj.container.idContainer.toLowerCase().includes(busca);
+                                    } else return obj                                    
                                 }).map((obj, index) => (
                                     <tr key={index}>
                                         <td>{index + 1}</td>

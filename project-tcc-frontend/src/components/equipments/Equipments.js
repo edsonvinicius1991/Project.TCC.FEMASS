@@ -80,16 +80,9 @@ function Equipments() {
                     </div>
                     <div className="col-sm-3 mt-5 mb-4 text-gred"></div>
 
-                    <div className="col-sm-3 mt-5 mb-4 text-gred">
-                        <div className="search">
-                            <form className="form-inline">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Search Asset" />
-                            </form>                            
-                        </div>
-                    </div>
                 </div>
                 
-                <Tabela vetor={equipments} handleRemove={removeEquipment} handleShow={handleShow} handleEdit={handleShowModalEdit} />
+                <Tabela vetorEquipments={equipments} handleRemove={removeEquipment} handleShow={handleShow} handleEdit={handleShowModalEdit} />
 
                 {/* <!--- ModelAdd Box ---> */}
                 <div className="model_box">

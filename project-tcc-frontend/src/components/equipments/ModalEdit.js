@@ -1,4 +1,4 @@
-import "./Equipments.css";
+//import "./Equipments.css";
 
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
