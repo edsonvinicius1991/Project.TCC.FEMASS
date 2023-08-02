@@ -71,7 +71,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
             .then((resp) => resp.json())
             .then((data) => {
                 setEquipment(data)
-                console.log(equipment)
+                //console.log(equipment)
             })
     }, [id])
 
