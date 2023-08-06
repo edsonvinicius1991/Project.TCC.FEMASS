@@ -1,6 +1,6 @@
 //import "./Equipments.css";
 
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import React from 'react';
 
 function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
@@ -23,6 +23,7 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
 
     const [busca, setBusca] = useState('');
 
+    
     const equipamentosFiltrados = vetorEquipments.filter((obj) => {
         if (buscaCategoria === 'AssetId') {
             return busca.toLowerCase() === ''
@@ -44,16 +45,40 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
     })
 
     {/* <!--- Ordenar Equipamentos ---> */ }
-    let parametroOrdem = ["assetId", "description", "dueDate", "container.idContainer", "location.rig"]
+    let parametroOrdem = ["assetId", "description", "dueDate"]
 
     const [sortByField, setSortByField] = useState("assetId");
-    const [sortOrder, setSortOrder] = useState("asc");
+    const [sortOrder, setSortOrder] = useState('asc');
     const [dataSorted, setDataSorted] = useState([]);
 
+    const buttonOrder = () => setSortOrder('des') 
+    console.log(sortOrder)
 
-    const data1 = [...equipamentosFiltrados].sort((a, b) => a[sortByField].toString().localeCompare(b[sortByField].toString(), "en", { numeric: true }));// without localeCompare: const data1 = [...data].sort((a, b) => (a.assetId < b.assetId ? -1 : 1)); 
+
+    //Dados em ordem descendente
+    const dataDes = [...equipamentosFiltrados].sort((a, b) => b[sortByField].toString().localeCompare(a[sortByField].toString(), "en", { numeric: true }));// without localeCompare: const data1 = [...data].sort((a, b) => (a.assetId < b.assetId ? -1 : 1)); 
+    //console.log(dataDes)
+    //Dados em ordem ascentente
+    const dataAsc = [...equipamentosFiltrados].sort((a, b) => a[sortByField].toString().localeCompare(b[sortByField].toString(), "en", { numeric: true }));// without localeCompare: const data1 = [...data].sort((a, b) => (a.assetId < b.assetId ? -1 : 1)); 
+    //console.log(dataAsc)
+
+    useEffect(() => {
+        if(sortOrder === 'asc'){
+            setDataSorted(dataAsc)
+        }else
+            setDataSorted(dataDes)
+    }, [vetorEquipments, sortByField ,busca, buscaCategoria, sortOrder]);
+
+
     
-
+    {/* <!--- Manipulação de datas ---> */ }
+    
+    let dateNow = new Date() //Recebe data atual
+    
+    var dataLess3M = new Date()
+    dataLess3M.setDate(dataLess3M.getDate() + 90)//Acrescenta 3 meses a data atual
+    
+    
 
 return (
 
@@ -81,6 +106,7 @@ return (
 
         <form className="form-inline" style={{ marginTop: "2rem" }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 320 512"><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" /></svg>
+            <button href="#" onClick={() => buttonOrder() }>{sortOrder}</button>
             <select
                 className="form-control"
                 name="parametroOrdem"
@@ -113,14 +139,14 @@ return (
                 </thead>
                 <tbody>
                     {
-                        data1.map((obj, index) => (
-                            <tr key={index}>
+                        dataSorted.map((obj, index) => (
+                            <tr key={index} style={ obj.dueDate < dateNow.toJSON() ? { color: 'red', fontWeight: 'bold'} : obj.dueDate < dataLess3M.toJSON() ? { color:'#DFA400', fontWeight: 'bold'}  : { backgroundColor: 'none'} }>
                                 <td>{index + 1}</td>
                                 <td>{obj.assetId}</td>
                                 <td>{obj.serialNumber}</td>
                                 <td>{obj.description}</td>
                                 <td>{obj.partNumber}</td>
-                                <td>{obj.dueDate}</td>
+                                <td >{obj.dueDate}</td>
                                 <td>{obj.container.idContainer}</td>
                                 <td>{obj.location.rig}</td>
                                 <td >

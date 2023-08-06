@@ -7,7 +7,7 @@ import { Modal } from 'react-bootstrap';
 
 function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
 
-    let id = 0
+    var id
     { obj !== null ? id = obj.assetId : id = null } //Recebendo AssetId do objeto vindo botão edit
 
     {/* <!--- Containers select box---> */ }
@@ -71,8 +71,8 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
             .then((resp) => resp.json())
             .then((data) => {
                 setEquipment(data)
-                //console.log(equipment)
             })
+            .catch((err) => console.log(err))
     }, [id])
 
 
