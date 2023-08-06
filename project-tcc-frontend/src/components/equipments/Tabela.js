@@ -52,7 +52,7 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
     const [dataSorted, setDataSorted] = useState([]);
 
     const buttonOrder = () => setSortOrder('des') 
-    console.log(sortOrder)
+    //console.log(sortOrder)
 
 
     //Dados em ordem descendente

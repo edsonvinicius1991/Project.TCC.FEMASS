@@ -8,7 +8,6 @@ import { Modal } from 'react-bootstrap';
 function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
 
     var id
-    { obj !== null ? id = obj.assetId : id = null } //Recebendo AssetId do objeto vindo botão edit
 
     {/* <!--- Containers select box---> */ }
 
@@ -32,7 +31,6 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
     {/* <!--- Location select box---> */ }
 
     const [location, setLocation] = useState([])
-
 
     useEffect(() => {
         fetch('http://localhost:8080/location/', {
@@ -61,19 +59,25 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
         location: ''
     });
 
-    useEffect(() => {
-        fetch(`http://localhost:8080/equipment/${id}`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((resp) => resp.json())
-            .then((data) => {
-                setEquipment(data)
+    {/* <!--- Get equipment data by id function---> */ }
+    function getEquipmentById(id) {
+                id = obj.assetId
+            fetch(`http://localhost:8080/equipment/${id}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             })
-            .catch((err) => console.log(err))
-    }, [id])
+                .then((resp) => resp.json())
+                .then((data) => {
+                    setEquipment(data)
+                })
+                .catch((err) => console.log(err))
+    }
+    
+    useEffect(() => {
+        { obj !== null ? getEquipmentById(id) : id = null } //Recebendo AssetId do objeto vindo botão edit
+    }, [showModalEdit])
 
 
     function handleInputChange(event) {
@@ -135,6 +139,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
             backdrop="static"
             keyboard={false}
             value
+            
 
         >
             <Modal.Header closeButton>
