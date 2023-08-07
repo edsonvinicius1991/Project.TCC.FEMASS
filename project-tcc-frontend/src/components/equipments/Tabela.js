@@ -48,12 +48,13 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
     let parametroOrdem = ["assetId", "description", "dueDate"]
 
     const [sortByField, setSortByField] = useState("assetId");
-    const [sortOrder, setSortOrder] = useState('asc');
+    const [sortOrder, setSortOrder] = useState('A-Z | 0-9');
     const [dataSorted, setDataSorted] = useState([]);
 
-    const buttonOrder = () => setSortOrder('des') 
-    //console.log(sortOrder)
-
+    const buttonOrder = (e) => {
+        e.preventDefault();
+        sortOrder === 'A-Z | 0-9' ? setSortOrder('Z-A | 9-0') : setSortOrder('A-Z | 0-9')
+    }
 
     //Dados em ordem descendente
     const dataDes = [...equipamentosFiltrados].sort((a, b) => b[sortByField].toString().localeCompare(a[sortByField].toString(), "en", { numeric: true }));// without localeCompare: const data1 = [...data].sort((a, b) => (a.assetId < b.assetId ? -1 : 1)); 
@@ -63,7 +64,7 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
     //console.log(dataAsc)
 
     useEffect(() => {
-        if(sortOrder === 'asc'){
+        if(sortOrder === 'A-Z | 0-9'){
             setDataSorted(dataAsc)
         }else
             setDataSorted(dataDes)
@@ -106,13 +107,14 @@ return (
 
         <form className="form-inline" style={{ marginTop: "2rem" }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 320 512"><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" /></svg>
-            <button href="#" onClick={() => buttonOrder() }>{sortOrder}</button>
+            <h3 > Sorted by:</h3>
+            <button className="btn btn-outline-secondary" style={{ marginLeft: "1rem" }} onClick={(e) => buttonOrder(e) }>{sortOrder}</button>
+
             <select
                 className="form-control"
                 name="parametroOrdem"
                 onChange={(e) => setSortByField(e.target.value)}
             >
-
                 {parametroOrdem.map((option) => (
                     <option value={option} key={option}>
                         {option}
