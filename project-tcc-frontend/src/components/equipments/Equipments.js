@@ -1,10 +1,12 @@
 import "./Equipments.css"
-import { useState, useEffect, useCallback } from 'react';
+
+import { useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 
 
 import Tabela from "./Tabela"
+import Table from "./Table"
 import ModalAdd from "./ModalAdd"
 import ModalEdit from "./ModalEdit";
 
@@ -33,7 +35,7 @@ function Equipments() {
     }
         
 
-    {/* <!--- Tabela Equipments---> */ }
+    {/* <!--- Table Equipments---> */ }
     const [equipments, setEquipments] = useState([]);
 
     useEffect(() => {
@@ -72,7 +74,7 @@ function Equipments() {
                 <div className="row ">
 
                     <div className="col-sm-3 offset-sm-0  mt-5 mb-4 text-gred" >
-                        <Button variant="success" onClick={handleShow} style={{ fontSize:"18px"}}>
+                        <Button variant="secondary" onClick={handleShow} style={{ fontSize:"20px"}}>
                             <i className="bi bi-plus" style={{ fontSize:"30px" , marginRight: "1rem"}}></i>
                             <b>New Equipment</b>
                         </Button>
@@ -80,16 +82,9 @@ function Equipments() {
                     </div>
                     <div className="col-sm-3 mt-5 mb-4 text-gred"></div>
 
-                    <div className="col-sm-3 mt-5 mb-4 text-gred">
-                        <div className="search">
-                            <form className="form-inline">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Search Asset" />
-                            </form>                            
-                        </div>
-                    </div>
                 </div>
                 
-                <Tabela vetor={equipments} handleRemove={removeEquipment} handleShow={handleShow} handleEdit={handleShowModalEdit} />
+                <Tabela vetorEquipments={equipments} handleRemove={removeEquipment} handleShow={handleShow} handleEdit={handleShowModalEdit} />
 
                 {/* <!--- ModelAdd Box ---> */}
                 <div className="model_box">

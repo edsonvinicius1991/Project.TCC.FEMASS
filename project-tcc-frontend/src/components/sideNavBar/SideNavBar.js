@@ -71,6 +71,7 @@ const SideNavBar = () => {
 						<span></span>
 						<span></span>
 					</button>
+					
 				</div>
 				<div className="nav-menu">
 					{menuItems.map(({ text, icon,link}) => (
