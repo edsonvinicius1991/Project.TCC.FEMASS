@@ -1,7 +1,9 @@
 //import "./Equipments.css";
 
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
 
 function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
 
@@ -23,8 +25,10 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
 
     const [busca, setBusca] = useState('');
 
-    
-    const equipamentosFiltrados = vetorEquipments.filter((obj) => {
+    const [equipments,setEquipments] = useState([...vetorEquipments]);
+
+
+    const equipamentosFiltrados = equipments.filter((obj) => {
         if (buscaCategoria === 'AssetId') {
             return busca.toLowerCase() === ''
                 ? obj
@@ -58,111 +62,146 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
 
     //Dados em ordem descendente
     const dataDes = [...equipamentosFiltrados].sort((a, b) => b[sortByField].toString().localeCompare(a[sortByField].toString(), "en", { numeric: true }));// without localeCompare: const data1 = [...data].sort((a, b) => (a.assetId < b.assetId ? -1 : 1)); 
-    //console.log(dataDes)
     //Dados em ordem ascentente
     const dataAsc = [...equipamentosFiltrados].sort((a, b) => a[sortByField].toString().localeCompare(b[sortByField].toString(), "en", { numeric: true }));// without localeCompare: const data1 = [...data].sort((a, b) => (a.assetId < b.assetId ? -1 : 1)); 
-    //console.log(dataAsc)
 
     useEffect(() => {
-        if(sortOrder === 'A-Z | 0-9'){
+        if (sortOrder === 'A-Z | 0-9') {
             setDataSorted(dataAsc)
-        }else
+        } else
             setDataSorted(dataDes)
-    }, [vetorEquipments, sortByField ,busca, buscaCategoria, sortOrder]);
+    }, [vetorEquipments, equipments, sortByField, busca, buscaCategoria, sortOrder]);
 
 
-    
+
     {/* <!--- Manipulação de datas ---> */ }
-    
+
     let dateNow = new Date() //Recebe data atual
-    
+
     var dataLess3M = new Date()
     dataLess3M.setDate(dataLess3M.getDate() + 90)//Acrescenta 3 meses a data atual
-    
-    
 
-return (
 
-    <div className="row">
-        <form className="form-inline">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
-            <select
-                className="form-control"
-                name="parametroBusca"
-                onChange={(e) => setBuscaCategoria(e.target.value)}
-            >
-                <option> Search By </option>
-                {parametroBusca.map((option) => (
-                    <option value={option} key={option}>
-                        {option}
-                    </option>
-                ))}
-            </select>
-            <input
-                className="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                onChange={(e) => setBusca(e.target.value)} />
-        </form>
+    {/* <!--- Filtro de equipmantos por expiração ---> */ }
 
-        <form className="form-inline" style={{ marginTop: "2rem" }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 320 512"><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" /></svg>
-            <h3 > Sorted by:</h3>
-            <button className="btn btn-outline-secondary" style={{ marginLeft: "1rem" }} onClick={(e) => buttonOrder(e) }>{sortOrder}</button>
 
-            <select
-                className="form-control"
-                name="parametroOrdem"
-                onChange={(e) => setSortByField(e.target.value)}
-            >
-                {parametroOrdem.map((option) => (
-                    <option value={option} key={option}>
-                        {option}
-                    </option>
-                ))}
-            </select>
-        </form>
-        <div className="row"></div>
+    function expireds(obj) {
+        return obj.dueDate < dateNow.toJSON();
+    }
+    function expiringLessThanNinety(obj) {
+        return obj.dueDate < dataLess3M.toJSON() && obj.dueDate > dateNow.toJSON();
+    }
 
-        <div className="table-responsive ">
-            <table className="table table-striped table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Asset </th>
-                        <th>SerialNumber</th>
-                        <th>Description</th>
-                        <th>PartNumber</th>
-                        <th>Due Date </th>
-                        <th>Container</th>
-                        <th>Location</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        dataSorted.map((obj, index) => (
-                            <tr key={index} style={ obj.dueDate < dateNow.toJSON() ? { color: 'red', fontWeight: 'bold'} : obj.dueDate < dataLess3M.toJSON() ? { color:'#DFA400', fontWeight: 'bold'}  : { backgroundColor: 'none'} }>
-                                <td>{index + 1}</td>
-                                <td>{obj.assetId}</td>
-                                <td>{obj.serialNumber}</td>
-                                <td>{obj.description}</td>
-                                <td>{obj.partNumber}</td>
-                                <td >{obj.dueDate}</td>
-                                <td>{obj.container.idContainer}</td>
-                                <td>{obj.location.rig}</td>
-                                <td >
-                                    {/*<a href="#" className="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i className="material-icons" >&#xE417;</i></a>*/}
-                                    <button href="#" className="btn btn-primary" id={obj.assetId} onClick={(e) => { edit(obj, e) }} title="Edit" data-toggle="tooltip" style={{ marginRight: "0.5rem", padding: "0.2rem 0.7rem" }}><i className="material-icons">&#xE254;</i></button>
-                                    <button href="#" className="btn btn-danger" id={obj.assetId} onClick={() => { if (window.confirm(`Are you sure to delete the equipment [Asset: ${obj.assetId}] ?`)) { remove(obj.assetId) } }} title="Delete" data-toggle="tooltip" style={{ color: "white", marginRight: "0.5rem", padding: "0.2rem 0.7rem" }}><i className="material-icons" >&#xE872;</i></button>
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+    const expiredFiltered = vetorEquipments.filter(expireds)
+    const expiringFiltered = vetorEquipments.filter(expiringLessThanNinety)
+
+    const expirationFilter = (e) => {
+        e.preventDefault();
+        if(e.target.value === 'Expiring'){
+            setEquipments(expiringFiltered) 
+        }else if(e.target.value === 'Expired'){
+            setEquipments(expiredFiltered) 
+        }else if (e.target.value === 'All'){
+            setEquipments([...vetorEquipments])
+        }
+    }
+
+
+    return (
+        
+        <div className="row">
+            <form className="form-inline" style={{ marginTop: "2rem" }}>             
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 320 512"><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" /></svg>
+                    <h3 > Filter by:</h3>
+                    <ButtonGroup  style={{ marginLeft: "1rem" }} onClick={expirationFilter}>
+                        <Button type= "radio" id="radioAll" variant="primary" value="All">ALL</Button>
+                        <Button type= "radio" id="radioExpiring" variant="warning" value="Expiring">Expiring</Button>
+                        <Button type= "radio" id="radioExpired" variant="danger" value="Expired"> Expired</Button>  
+                    </ButtonGroup>                    
+            </form>
+
+            <form className="form-inline" style={{ marginTop: "2rem" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 320 512"><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" /></svg>
+                <h3 > Sorted by:</h3>
+                <button className="btn btn-outline-secondary" style={{ marginLeft: "1rem" }} onClick={(e) => buttonOrder(e)}>{sortOrder}</button>
+
+                <select
+                    className="form-control"
+                    name="parametroOrdem"
+                    onChange={(e) => setSortByField(e.target.value)}
+                >
+                    {parametroOrdem.map((option) => (
+                        <option value={option} key={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+            </form>
+
+            <div className="row"></div>
+
+            <form className="form-inline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
+                <select
+                    className="form-control"
+                    name="parametroBusca"
+                    onChange={(e) => setBuscaCategoria(e.target.value)}
+                >
+                    <option> Search By </option>
+                    {parametroBusca.map((option) => (
+                        <option value={option} key={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+                <input
+                    className="form-control mr-sm-2"
+                    type="search"
+                    placeholder="Search"
+                    onChange={(e) => setBusca(e.target.value)} />
+            </form>
+
+            <div className="row"></div>
+
+            <div className="table-responsive ">
+                <table className="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Asset </th>
+                            <th>SerialNumber</th>
+                            <th>Description</th>
+                            <th>PartNumber</th>
+                            <th>Due Date </th>
+                            <th>Container</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            dataSorted.map((obj, index) => (
+                                <tr key={index} style={obj.dueDate < dateNow.toJSON() ? { color: 'red', fontWeight: 'bold' } : obj.dueDate < dataLess3M.toJSON() ? { color: '#DFA400', fontWeight: 'bold' } : { backgroundColor: 'none' }}>
+                                    <td>{index + 1}</td>
+                                    <td>{obj.assetId}</td>
+                                    <td>{obj.serialNumber}</td>
+                                    <td>{obj.description}</td>
+                                    <td>{obj.partNumber}</td>
+                                    <td >{obj.dueDate}</td>
+                                    <td>{obj.container.idContainer}</td>
+                                    <td>{obj.location.rig}</td>
+                                    <td >
+                                        {/*<a href="#" className="view" title="View" data-toggle="tooltip" style={{ color: "#10ab80" }}><i className="material-icons" >&#xE417;</i></a>*/}
+                                        <button href="#" className="btn btn-primary" id={obj.assetId} onClick={(e) => { edit(obj, e) }} title="Edit" data-toggle="tooltip" style={{ marginRight: "0.5rem", padding: "0.2rem 0.7rem" }}><i className="material-icons">&#xE254;</i></button>
+                                        <button href="#" className="btn btn-danger" id={obj.assetId} onClick={() => { if (window.confirm(`Are you sure to delete the equipment [Asset: ${obj.assetId}] ?`)) { remove(obj.assetId) } }} title="Delete" data-toggle="tooltip" style={{ color: "white", marginRight: "0.5rem", padding: "0.2rem 0.7rem" }}><i className="material-icons" >&#xE872;</i></button>
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-)
+    )
 };
 export default Tabela;

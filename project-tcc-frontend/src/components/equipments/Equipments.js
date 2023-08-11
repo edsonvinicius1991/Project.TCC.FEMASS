@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 
 
 import Tabela from "./Tabela"
-import Table from "./Table"
 import ModalAdd from "./ModalAdd"
 import ModalEdit from "./ModalEdit";
 
@@ -105,7 +104,7 @@ function Equipments() {
             </div>
         </div>
 
-
+ 
 
     )
 };
