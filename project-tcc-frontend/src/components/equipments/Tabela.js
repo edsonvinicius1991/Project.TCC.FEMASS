@@ -7,8 +7,6 @@ import Button from 'react-bootstrap/Button';
 
 function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
 
-    //const equipments = vetorEquipments.map('')
-
     const edit = (obj) => {
         console.log(obj)
         handleEdit(obj)
@@ -25,8 +23,11 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
 
     const [busca, setBusca] = useState('');
 
-    const [equipments,setEquipments] = useState([...vetorEquipments]);
+    const [equipments, setEquipments] = useState([]);
 
+    useEffect(() => {
+        setEquipments([...vetorEquipments])
+    }, [vetorEquipments])
 
     const equipamentosFiltrados = equipments.filter((obj) => {
         if (buscaCategoria === 'AssetId') {
@@ -97,31 +98,31 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
 
     const expirationFilter = (e) => {
         e.preventDefault();
-        if(e.target.value === 'Expiring'){
-            setEquipments(expiringFiltered) 
-        }else if(e.target.value === 'Expired'){
-            setEquipments(expiredFiltered) 
-        }else if (e.target.value === 'All'){
+        if (e.target.value === 'Expiring') {
+            setEquipments(expiringFiltered)
+        } else if (e.target.value === 'Expired') {
+            setEquipments(expiredFiltered)
+        } else if (e.target.value === 'All') {
             setEquipments([...vetorEquipments])
         }
     }
 
 
     return (
-        
+
         <div className="row">
-            <form className="form-inline" style={{ marginTop: "2rem" }}>             
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 320 512"><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" /></svg>
-                    <h3 > Filter by:</h3>
-                    <ButtonGroup  style={{ marginLeft: "1rem" }} onClick={expirationFilter}>
-                        <Button type= "radio" id="radioAll" variant="primary" value="All">ALL</Button>
-                        <Button type= "radio" id="radioExpiring" variant="warning" value="Expiring">Expiring</Button>
-                        <Button type= "radio" id="radioExpired" variant="danger" value="Expired"> Expired</Button>  
-                    </ButtonGroup>                    
+            <form className="form-inline" style={{ marginTop: "2rem" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="mx-3" viewBox="0 0 16 16"> <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" /> </svg>
+                <h3 > Filter by:</h3>
+                <ButtonGroup style={{ marginLeft: "1rem" }} onClick={expirationFilter} type= "radio">
+                    <Button type="radio" id="radioAll" variant="primary" value="All">ALL</Button>
+                    <Button type="radio" id="radioExpiring" variant="warning" value="Expiring">Expiring</Button>
+                    <Button type="radio" id="radioExpired" variant="danger" value="Expired"> Expired</Button>
+                </ButtonGroup>
             </form>
 
             <form className="form-inline" style={{ marginTop: "2rem" }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 320 512"><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 16 16"> <path d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" /> </svg>
                 <h3 > Sorted by:</h3>
                 <button className="btn btn-outline-secondary" style={{ marginLeft: "1rem" }} onClick={(e) => buttonOrder(e)}>{sortOrder}</button>
 

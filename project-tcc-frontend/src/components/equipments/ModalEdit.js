@@ -61,20 +61,20 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
 
     {/* <!--- Get equipment data by id function---> */ }
     function getEquipmentById(id) {
-                id = obj.assetId
-            fetch(`http://localhost:8080/equipment/${id}`, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+        id = obj.assetId
+        fetch(`http://localhost:8080/equipment/${id}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                setEquipment(data)
             })
-                .then((resp) => resp.json())
-                .then((data) => {
-                    setEquipment(data)
-                })
-                .catch((err) => console.log(err))
+            .catch((err) => console.log(err))
     }
-    
+
     useEffect(() => {
         { obj !== null ? getEquipmentById(id) : id = null } //Recebendo AssetId do objeto vindo botão edit
     }, [showModalEdit])
@@ -128,8 +128,6 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
 
     }
 
-
-
     return (
 
 
@@ -139,7 +137,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
             backdrop="static"
             keyboard={false}
             value
-            
+
 
         >
             <Modal.Header closeButton>
@@ -156,7 +154,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder= "Enter AssetId"
-                            value= {equipment.assetId}
+                            value={equipment.assetId}
                             disabled={true}
 
                         />
@@ -169,7 +167,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder="Enter Description"
-                            value= {equipment.description} 
+                            value={equipment.description}
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -180,7 +178,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder="Enter Serial Number"
-                            value= {equipment.serialNumber} 
+                            value={equipment.serialNumber}
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -191,7 +189,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder="Enter Part number"
-                            value= {equipment.partNumber} 
+                            value={equipment.partNumber}
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -202,7 +200,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                             className="form-control"
                             onChange={handleInputChange}
                             //placeholder="Enter Expiration Date"
-                            value= {equipment.dueDate} 
+                            value={equipment.dueDate}
 
                         />
                     </div>
@@ -211,9 +209,10 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                         <select
                             className="form-control"
                             name="container"
+                            defaultValue={equipment.container.idContainer}
                             onChange={handleSelectContainer}
                         >
-                            <option disabled={true} style={{backgroundColor: "lightblue"}}>{equipment.container.idContainer}</option>
+                            <option defaultValue disabled={true} style={{ backgroundColor: "lightblue" }}>{equipment.container.idContainer}</option>
                             {containers.map((option) => (
                                 <option value={option.idContainer} key={option.idContainer}>
                                     {option.idContainer}
@@ -227,10 +226,10 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                         <select
                             className="form-control"
                             name="location"
+                            defaultValue={equipment.location.rig}
                             onChange={handleSelectLocation}
                         >
-
-<option disabled={true} style={{backgroundColor: "lightblue"}}>{equipment.location.rig}</option>
+                            <option disabled={true} style={{ backgroundColor: "lightblue" }}>{equipment.location.rig}</option>
                             {location.map((option) => (
                                 <option value={option.idLocation} key={option.idLocation}>
                                     {option.rig}
@@ -240,7 +239,7 @@ function ModalEdit({ showModalEdit, handleCloseModalEdit, obj }) {
                     </div>
                     <div>
                         <button type="submit" className="btn btn-success mt-4"  >Save Changes</button>
-                        <button type="button" className="btn btn-secondary mt-4"  data-dismiss="modal" onClick={handleCloseModalEdit} style={{marginLeft: "6px"}}>Cancel</button>
+                        <button type="button" className="btn btn-secondary mt-4" data-dismiss="modal" onClick={handleCloseModalEdit} style={{ marginLeft: "6px" }}>Cancel</button>
                     </div>
 
                 </form>

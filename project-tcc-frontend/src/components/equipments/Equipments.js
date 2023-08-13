@@ -104,8 +104,6 @@ function Equipments() {
             </div>
         </div>
 
- 
-
     )
 };
 export default Equipments;
