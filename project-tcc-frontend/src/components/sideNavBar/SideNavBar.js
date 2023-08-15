@@ -50,7 +50,7 @@ const SideNavBar = () => {
 			className={
 				isExpanded
 					? "side-nav-container"
-					: "side-nav-container side-nav-container-NX" 
+					: "side-nav-container side-nav-container-NX"
 			}
 		>
 			<div className="nav-upper">
@@ -71,10 +71,26 @@ const SideNavBar = () => {
 						<span></span>
 						<span></span>
 					</button>
-					
+				</div>
+				<div className="nav-footer">
+					{isExpanded && (
+						<div className="nav-details">
+							<img
+								className="nav-footer-avatar"
+								src="icons/admin-avatar.svg"
+								alt=""
+								srcSet=""
+							/>
+							<div className="nav-footer-info">
+								<p className="nav-footer-user-name">Admin</p>
+								<p className="nav-footer-user-position">store admin</p>
+							</div>
+						</div>
+					)}
+					<img className="logout-icon" src="icons/logout.svg" alt="" srcSet="" />
 				</div>
 				<div className="nav-menu">
-					{menuItems.map(({ text, icon,link}) => (
+					{menuItems.map(({ text, icon, link }) => (
 						<a
 							key={text}
 							className={isExpanded ? "menu-item" : "menu-item menu-item-NX"}
@@ -86,23 +102,7 @@ const SideNavBar = () => {
 					))}
 				</div>
 			</div>
-			<div className="nav-footer">
-				{isExpanded && (
-					<div className="nav-details">
-						<img
-							className="nav-footer-avatar"
-							src="icons/admin-avatar.svg"
-							alt=""
-							srcSet=""
-						/>
-						<div className="nav-footer-info">
-							<p className="nav-footer-user-name">Admin</p>
-							<p className="nav-footer-user-position">store admin</p>
-						</div>
-					</div>
-				)}
-				<img className="logout-icon" src="icons/logout.svg" alt="" srcSet="" />
-			</div>
+
 		</div>
 	);
 };
