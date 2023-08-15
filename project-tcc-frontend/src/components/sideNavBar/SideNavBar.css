@@ -4,6 +4,7 @@
 	background-color: var(--dark);
 	width: 300px;
 	height: auto;
+	min-height: 100vh;
 	position: relative;
 	color: var(--light);
 
