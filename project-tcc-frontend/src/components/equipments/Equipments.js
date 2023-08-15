@@ -11,11 +11,9 @@ import ModalEdit from "./ModalEdit";
 
 
 
-function Equipments() {
+function Equipments({filter}) {
 
     const navigate = useNavigate()
-    
-
 
     {/* <!--- ModalAdd---> */ }
     const [show, setShow] = useState(false);
@@ -83,7 +81,12 @@ function Equipments() {
 
                 </div>
                 
-                <Tabela vetorEquipments={equipments} handleRemove={removeEquipment} handleShow={handleShow} handleEdit={handleShowModalEdit} />
+                <Tabela 
+                    vetorEquipments={equipments} 
+                    handleRemove={removeEquipment} 
+                    handleShow={handleShow} 
+                    handleEdit={handleShowModalEdit} 
+                    filter={filter} />
 
                 {/* <!--- ModelAdd Box ---> */}
                 <div className="model_box">

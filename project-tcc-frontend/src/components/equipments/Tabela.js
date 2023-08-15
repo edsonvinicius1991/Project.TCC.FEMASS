@@ -5,7 +5,7 @@ import React from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 
-function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
+function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow, filter }) {
 
     const edit = (obj) => {
         console.log(obj)
@@ -27,6 +27,11 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
 
     useEffect(() => {
         setEquipments([...vetorEquipments])
+        
+        filter === "Expired" ? setEquipments(expiredFiltered) :
+        filter === "Expiring" ? setEquipments(expiringFiltered) :
+        filter = null
+
     }, [vetorEquipments])
 
     const equipamentosFiltrados = equipments.filter((obj) => {
@@ -96,6 +101,8 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
     const expiredFiltered = vetorEquipments.filter(expireds)
     const expiringFiltered = vetorEquipments.filter(expiringLessThanNinety)
 
+    
+
     const expirationFilter = (e) => {
         e.preventDefault();
         if (e.target.value === 'Expiring') {
@@ -114,7 +121,7 @@ function Tabela({ vetorEquipments, handleRemove, handleEdit, handleShow }) {
             <form className="form-inline" style={{ marginTop: "2rem" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="mx-3" viewBox="0 0 16 16"> <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" /> </svg>
                 <h3 > Filter by:</h3>
-                <ButtonGroup style={{ marginLeft: "1rem" }} onClick={expirationFilter} type= "radio">
+                <ButtonGroup style={{ marginLeft: "1rem" }} onClick={expirationFilter} type= "radio" >
                     <Button type="radio" id="radioAll" variant="primary" value="All">ALL</Button>
                     <Button type="radio" id="radioExpiring" variant="warning" value="Expiring">Expiring</Button>
                     <Button type="radio" id="radioExpired" variant="danger" value="Expired"> Expired</Button>

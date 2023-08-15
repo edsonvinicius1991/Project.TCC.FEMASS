@@ -43,7 +43,7 @@ function Cards() {
                         <h4 className="card-title">Certification expiration 90 days</h4>
                         <div className="card-yellow"><i className="bi bi-shield-exclamation"></i></div>
                         <h1 className="card-text">{expiringFiltered.length}</h1>
-                        <a href="#" className="card-link">More details</a>
+                        <a href="/equipments/filter_expiring" className="card-link">More details</a>
 
                     </div>
                 </div>
@@ -54,7 +54,7 @@ function Cards() {
                         <h4 className="card-title">Certificacion expired</h4>
                         <div className="card-red"><i className="bi bi-shield-x"></i></div>
                         <h1 className="card-text">{expiredFiltered.length}</h1>
-                        <a href="#" className="card-link">More details</a>
+                        <a href="/equipments/filter_expired" className="card-link">More details</a>
 
                     </div>
                 </div>
