@@ -57,6 +57,19 @@ public class EquipmentController {
             return ResponseEntity.status(HttpStatus.CREATED).body(((Object) equipmentService.save(equipmentModel)));        
 
     }
+    /* {
+    "assetId": "14875391",
+    "description": "4462EA",
+    "partNumber": "F131463000",
+    "dueDate": "2022-12-25",
+    
+    "container": {
+        "idContainer": "TB301"
+    },
+    "location":{
+        "idLocation": "1"
+    }
+    }*/
     
     @GetMapping
     public ResponseEntity<List<EquipmentModel>> getAllEquipment(){
