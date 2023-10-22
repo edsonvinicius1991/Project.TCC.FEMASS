@@ -42,7 +42,7 @@ const SideNavBar = () => {
 		{
 			text: "Shipping",
 			icon: "icons/box-seam.svg",
-			link: "*",
+			link: "/shipping",
 		},
 	];
 	return (

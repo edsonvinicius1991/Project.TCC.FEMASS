@@ -1,8 +1,9 @@
 import './App.css';
-import Overview from "./pages/overview/Overview";
-import SideNavBar from "./components/sideNavBar/SideNavBar"
-import NaoEncontrado from './pages/NaoEncontrado'
-import Equipments from './pages/equipments/Equipments';
+import Overview from "./pages/overview/Overview"
+import SideNavBar from "./pages/sideNavBar/SideNavBar"
+import NaoEncontrado from './pages/error/NaoEncontrado'
+import Equipments from './pages/equipments/Equipments'
+import Shipping from './pages/shipping/Shipping'
 import {BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -25,7 +26,7 @@ function App() {
               <Route path="/wirelineunits" element={<NaoEncontrado />} />
               <Route path="/cables" element={<NaoEncontrado />} />
               <Route path="/orders" element={<NaoEncontrado />} />
-              <Route path="/shipping" element={<NaoEncontrado />} />
+              <Route path="/shipping" element={<Shipping />} />
             </Routes>
           </main>
           
