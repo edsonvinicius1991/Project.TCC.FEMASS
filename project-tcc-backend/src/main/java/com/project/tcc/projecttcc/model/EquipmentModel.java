@@ -20,7 +20,11 @@ public class EquipmentModel implements Serializable{
     private LocalDate dueDate;
     @Column(nullable = true)
     private String serialNumber;
-    
+    //@Column(nullable = true)
+    //private LocalDate lastMaintenance;
+    //@Column(nullable = true)
+    //private String maintenancePoints;
+
     @ManyToOne
     @JoinColumn(name = "idContainer")
     private ContainerModel container;    
@@ -28,6 +32,7 @@ public class EquipmentModel implements Serializable{
     @ManyToOne
     @JoinColumn(name = "idLocation")
     private LocationModel location;
+
 
     public static long getSerialversionuid() {
         return serialVersionUID;

@@ -1,19 +1,13 @@
-//import "./Equipments.css";
-
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
-
 import { Modal } from 'react-bootstrap';
 
 function ModalAdd({
     show,
     handleClose
-
 }) {
 
-
     {/* <!--- Containers select box---> */ }
-
     const [containers, setContainers] = useState([])
 
     useEffect(() => {
@@ -49,8 +43,8 @@ function ModalAdd({
             .catch((err) => console.log(err))
 
     }, [])
-    {/* <!--- Cadastro equipment---> */ }
 
+    {/* <!--- Record equipment---> */ }
     const [equipment, setEquipment] = useState({
         assetId: '',
         description: '',
@@ -63,7 +57,6 @@ function ModalAdd({
 
     function handleInputChange(event) {
         setEquipment({ ...equipment, [event.target.name]: event.target.value })
-
     }
     function handleSelectContainer(event) {
         setEquipment({
@@ -84,7 +77,7 @@ function ModalAdd({
 
     const navigate = useNavigate()
 
-
+    {/* <!--- Function save equipment---> */ }
     function handleFormSubmit(event) {
         event.preventDefault();
 
@@ -106,27 +99,20 @@ function ModalAdd({
                     alert("Preencha os campos obrigatórios: (*)\n" + "Asset ID*\n" + "Description*")
             })
             .catch(err => alert(err))
-
     }
 
-
-
     return (
-
-
         <Modal
             show={show}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
             value
-
         >
             <Modal.Header closeButton>
                 <Modal.Title>Add Equipment</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
                 <form onSubmit={handleFormSubmit} >
                     <div className="form-group">
                         <div><label className="col-form-label"> Asset Number * </label></div>
@@ -136,7 +122,6 @@ function ModalAdd({
                             className="form-control"
                             onChange={handleInputChange}
                             placeholder="Enter Asset ID"
-
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -177,7 +162,6 @@ function ModalAdd({
                             className="form-control"
                             onChange={handleInputChange}
                             placeholder="Enter Expiration Date"
-
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -195,7 +179,6 @@ function ModalAdd({
                             ))}
                         </select>
                     </div>
-
                     <div className="form-group mt-3">
                         <div><label> Location * </label></div>
                         <select
@@ -203,7 +186,6 @@ function ModalAdd({
                             name="location"
                             onChange={handleSelectLocation}
                         >
-
                             <option>Selecione uma opção</option>
                             {location.map((option) => (
                                 <option value={option.idLocation} key={option.idLocation}>
@@ -216,11 +198,9 @@ function ModalAdd({
                         <button type="submit" className="btn btn-success mt-4"  >Save</button>
                         <button type="button" className="btn btn-secondary mt-4" data-dismiss="modal" onClick={handleClose} style={{ marginLeft: "6px" }}>Cancel</button>
                     </div>
-
                 </form>
             </Modal.Body>
         </Modal>
-
     )
 };
 export default ModalAdd;

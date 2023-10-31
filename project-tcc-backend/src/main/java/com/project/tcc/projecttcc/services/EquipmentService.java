@@ -14,8 +14,6 @@ import com.project.tcc.projecttcc.repositories.EquipmentRepository;
 public class EquipmentService {
 
     @Autowired
-    
-
     final EquipmentRepository equipmentRepository;
 
     public EquipmentService(EquipmentRepository equipmentRepository) {
