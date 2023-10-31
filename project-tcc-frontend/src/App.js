@@ -7,6 +7,7 @@ import Shipping from './pages/shipping/Shipping'
 import {BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './pages/login/Login';
 import Containers from './pages/containers/Containers';
+import Location from './pages/locations/Location';
 
 
 
@@ -27,6 +28,7 @@ function App() {
               <Route path="/equipments/filter_expired" element={<Equipments filter={'Expired'}/>} />
               <Route path="/wirelineunits" element={<NaoEncontrado />} />
               <Route path="/containers" element={<Containers />} />
+              <Route path="/locations" element={<Location />} />
               <Route path="/cables" element={<NaoEncontrado />} />
               <Route path="/orders" element={<NaoEncontrado />} />
               <Route path="/shipping" element={<Shipping />} />

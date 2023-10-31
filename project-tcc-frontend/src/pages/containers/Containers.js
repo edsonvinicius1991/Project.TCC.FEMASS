@@ -30,16 +30,16 @@ function Containers({ filter }) {
     }
 
     {/* <!--- Fill table Containers---> */ }
-    const [equipments, setEquipments] = useState([]);
+    const [containers, setContainers] = useState([]);
 
     useEffect(() => {
         fetch("http://localhost:8080/container")
             .then(resp => resp.json())
-            .then(data => setEquipments(data));
+            .then(data => setContainers(data));
     }, []);
 
     {/* <!--- Remove function---> */ }
-    function removeEquipment(id) {
+    function removeContainer(id) {
         fetch(`http://localhost:8080/container/${id}`, {
             method: 'DELETE',
             headers: {
@@ -55,22 +55,22 @@ function Containers({ filter }) {
 
     return (
         <div className="container ">
-            <h1 style={{ margin: "50px 25px" }}>EQUIPMENTS</h1>
+            <h1 style={{ margin: "50px 25px" }}>CONTAINERS</h1>
             <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded"  >
                 <div className="row ">
                     <div className="col-sm-3 offset-sm-0  mt-5 mb-4 text-gred" >
                         <Button variant="secondary" onClick={handleShow} style={{ fontSize: "20px" }}>
                             <i className="bi bi-plus" style={{ fontSize: "30px", marginRight: "1rem" }}></i>
-                            <b>New Equipment</b>
+                            <b>New Container</b>
                         </Button>
                     </div>
                     <div className="col-sm-3 mt-5 mb-4 text-gred"></div>
                 </div>
 
-                {/* <!--- Table equipments ---> */}
+                {/* <!--- Table containers ---> */}
                 <Tabela
-                    vetorEquipments={equipments}
-                    handleRemove={removeEquipment}
+                    vetorContainers={containers}
+                    handleRemove={removeContainer}
                     handleShow={handleShow}
                     handleEdit={handleShowModalEdit}
                     filter={filter} />

@@ -15,6 +15,16 @@ const SideNavBar = () => {
 			link: "/equipments",
 		},
 		{
+			text: "Containers",
+			icon: "icons/contentor.svg",
+			link: "/containers",
+		},
+		{
+			text: "Locations",
+			icon: "icons/geo-alt.svg",
+			link: "/locations",
+		},
+		{
 			text: "Wireline Units",
 			icon: "icons/truck.svg",
 			link: "*",
@@ -24,24 +34,14 @@ const SideNavBar = () => {
 			icon: "icons/cable-reel.png",
 			link: "*",
 		},
-		{
-			text: "Locations",
-			icon: "icons/geo-alt.svg",
-			link: "*",
-		},
-		{
-			text: "Containers",
-			icon: "icons/file-text.svg",
-			link: "/containers",
-		},
-		{
+		/*{
 			text: "Search",
 			icon: "icons/search.svg",
 			link: "*",
-		},
+		},*/
 		{
 			text: "Shipping",
-			icon: "icons/box-seam.svg",
+			icon: "icons/container-ship.png",
 			link: "/shipping",
 		},
 	];
