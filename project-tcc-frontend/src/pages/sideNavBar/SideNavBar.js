@@ -30,9 +30,9 @@ const SideNavBar = () => {
 			link: "*",
 		},
 		{
-			text: "Orders",
+			text: "Containers",
 			icon: "icons/file-text.svg",
-			link: "*",
+			link: "/containers",
 		},
 		{
 			text: "Search",
